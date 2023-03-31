@@ -24,8 +24,19 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category put(@RequestParam("category_name") String category_name) {
-        return categoryRepository.save(new Category(category_name));
+    public Category put(@RequestParam("category_id") Long category_id, @RequestParam("category_name") String category_name) {
+        return categoryRepository.save(new Category(category_id, category_name));
     }
 
+    @PutMapping(value = "/{category_id}")
+    public Category update(@PathVariable("category_id") Long category_id, @RequestParam("category_name") String category_name) {
+        Optional<Category> category=categoryRepository.findById(category_id);
+        category.get().setCategory_name(category_name);
+        return categoryRepository.save(category.get());
+    }
+
+    @DeleteMapping
+    public void delete(@RequestParam("category_id") Long category_id) {
+        categoryRepository.deleteById(category_id);
+    }
 }
