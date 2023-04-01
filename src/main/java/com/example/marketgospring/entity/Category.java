@@ -10,13 +10,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Category")
+@Table(name = "category")
 public class Category {
     @Id
-    private Long category_id;
+    private Long categoryId;
 
     @Column
-    private String category_name;
+    private String categoryName;
 
 
 }

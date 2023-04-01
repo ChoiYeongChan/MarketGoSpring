@@ -2,12 +2,14 @@ package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Category;
 import com.example.marketgospring.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value="/category")
 public class CategoryController {
@@ -24,19 +26,19 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category put(@RequestParam("category_id") Long category_id, @RequestParam("category_name") String category_name) {
-        return categoryRepository.save(new Category(category_id, category_name));
+    public Category put(@RequestParam("categoryId") Long categoryId, @RequestParam("categoryName") String categoryName) {
+        return categoryRepository.save(new Category(categoryId, categoryName));
     }
 
-    @PutMapping(value = "/{category_id}")
-    public Category update(@PathVariable("category_id") Long category_id, @RequestParam("category_name") String category_name) {
-        Optional<Category> category=categoryRepository.findById(category_id);
-        category.get().setCategory_name(category_name);
+    @PutMapping(value = "/{categoryId}")
+    public Category update(@PathVariable("categoryId") Long categoryId, @RequestParam("categoryName") String categoryName) {
+        Optional<Category> category=categoryRepository.findById(categoryId);
+        category.get().setCategoryName(categoryName);
         return categoryRepository.save(category.get());
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("category_id") Long category_id) {
-        categoryRepository.deleteById(category_id);
+    public void delete(@RequestParam("categoryId") Long categoryId) {
+        categoryRepository.deleteById(categoryId);
     }
 }
