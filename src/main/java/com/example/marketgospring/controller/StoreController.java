@@ -26,8 +26,20 @@ public class StoreController {
     }
 
     @PostMapping
-    public Store put(@RequestParam("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketName") String marketName) {
-        return storeRepository.save(new Store(storeId,storeName, storeAddress1,storeAddress2,storeRatings,storePhonenum,storeInfo,cardAvail,localAvail,storeNum,marketName));
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketName") String marketName) {
+        final Store store = Store.builder()
+                .storeName(storeName)
+                .storeAddress1(storeAddress1)
+                .storeAddress2(storeAddress2)
+                .storeRatings(storeRatings)
+                .storePhonenum(storePhonenum)
+                .storeInfo(storeInfo)
+                .cardAvail(cardAvail)
+                .localAvail(localAvail)
+                .storeNum(storeNum)
+                .marketName(marketName)
+                .build();
+        return storeRepository.save(store);
     }
 
     @PutMapping(value = "/{storeId}")

@@ -26,8 +26,11 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category put(@RequestParam("categoryId") Long categoryId, @RequestParam("categoryName") String categoryName) {
-        return categoryRepository.save(new Category(categoryId, categoryName));
+    public Category put(@RequestParam("categoryName") String categoryName) {
+        final Category category= Category.builder()
+                .categoryName(categoryName).
+                build();
+        return categoryRepository.save(category);
     }
 
     @PutMapping(value = "/{categoryId}")

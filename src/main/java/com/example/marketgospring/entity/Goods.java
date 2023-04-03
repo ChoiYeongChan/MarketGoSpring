@@ -1,15 +1,9 @@
 package com.example.marketgospring.entity;
 
 import jdk.jfr.Timestamp;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,9 +11,10 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "goods")
 public class Goods {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long goodsId;
     @Column
     private String goodsName;

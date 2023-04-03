@@ -2,19 +2,17 @@ package com.example.marketgospring.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "market")
 public class Market {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long marketId;
     @Column
     private String marketName;

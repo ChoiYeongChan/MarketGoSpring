@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Builder
 @Table(name = "category")
 public class Category {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
-
     @Column
     private String categoryName;
+
 
 
 }

@@ -39,8 +39,22 @@ public class MarketController {
         return marketRepository.findByMarketLocation(marketLocation);
     }
     @PostMapping
-    public Market put(@RequestParam("marketId") Long marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard) {
-        return marketRepository.save(new Market(marketId, marketName, marketAddress1, marketAddress2, marketLocation,marketLatitude,marketLongitude,marketRatings,marketInfo,parking,toilet,marketPhonenum,marketGiftcard));
+    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard) {
+        final Market market=Market.builder()
+                .marketName(marketName)
+                .marketAddress1(marketAddress1)
+                .marketAddress2(marketAddress2)
+                .marketLocation(marketLocation)
+                .marketLatitude(marketLatitude)
+                .marketLongitude(marketLongitude)
+                .marketRatings(marketRatings)
+                .marketInfo(marketInfo)
+                .parking(parking)
+                .toilet(toilet)
+                .marketPhonenum(marketPhonenum)
+                .marketGiftcard(marketGiftcard)
+                .build();
+        return marketRepository.save(market);
     }
     @PutMapping(value = "/{marketId}")
     public Market update(@PathVariable("marketId") Long marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard) {
