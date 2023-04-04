@@ -30,7 +30,7 @@ public class MarketController {
         return marketRepository.findById(id);
     }
 
-    @GetMapping(value = "/name/{marketName}")
+    @GetMapping(value = "/marketName/{marketName}")
     public List<Market> findByName(@PathVariable("marketName") String marketName) {
         return marketRepository.findByMarketName(marketName);
     }

@@ -23,16 +23,29 @@ public class MemberController {
         return memberRepository.findAll();
     }
     @GetMapping(value = "/{memberId}")
-    public Optional<Member> findOne(@PathVariable ("memberId") String memberId) {
-        return memberRepository.findByMemberId(memberId);
+    public Optional<Member> findOne(@PathVariable ("memberId") Long memberId) {
+        return memberRepository.findById(memberId);
+    }
+    @GetMapping(value = "/memberToken/{memberToken}")
+    public Optional<Member> findByToken(@PathVariable("memberToken")String memberToken) {
+        return memberRepository.findByMemberToken(memberToken);
     }
     @PostMapping
-    public Member put(@RequestParam ("memberId") String memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
-        return memberRepository.save(new Member(memberId,memberName,interestMarket,cartId,storeId,recentLatitude,recentLongitude));
+    public Member put(@RequestParam ("memberToken") String memberToken, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+        final Member member= Member.builder()
+                .memberToken(memberToken)
+                .memberName(memberName)
+                .interestMarket(interestMarket)
+                .cartId(cartId)
+                .storeId(storeId)
+                .recentLatitude(recentLatitude)
+                .recentLongitude(recentLongitude)
+                .build();
+        return memberRepository.save(member);
     }
     @PutMapping(value = "/{memberId}")
-    public Member update(@PathVariable("memberId") String memberId,  @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
-        Optional<Member> member = memberRepository.findByMemberId(memberId);
+    public Member update(@PathVariable("memberId") Long memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+        Optional<Member> member = memberRepository.findById(memberId);
         member.get().setMemberName(memberName);
         member.get().setInterestMarket(interestMarket);
         member.get().setCartId(cartId);
@@ -42,7 +55,7 @@ public class MemberController {
         return memberRepository.save(member.get());
     }
     @DeleteMapping
-    public void delete(@RequestParam("memberId") String memberId) {
-        memberRepository.deleteByMemberId(memberId);
+    public void delete(@RequestParam("memberId") Long memberId) {
+        memberRepository.deleteById(memberId);
     }
 }

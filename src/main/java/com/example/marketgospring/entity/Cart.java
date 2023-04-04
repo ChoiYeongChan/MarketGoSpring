@@ -37,4 +37,24 @@ public class Cart {
     private Long goodsId9;
     @Column
     private Long goodsId10;
+    @Column
+    private int unit1;
+    @Column
+    private int unit2;
+    @Column
+    private int unit3;
+    @Column
+    private int unit4;
+    @Column
+    private int unit5;
+    @Column
+    private int unit6;
+    @Column
+    private int unit7;
+    @Column
+    private int unit8;
+    @Column
+    private int unit9;
+    @Column
+    private int unit10;
 }

@@ -1,9 +1,6 @@
 package com.example.marketgospring.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,10 +9,13 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "member")
 public class Member {
-    @Id
-    private String memberId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long memberId;
+    @Column
+    private String memberToken;
     @Column
     private String memberName;
     @Column
