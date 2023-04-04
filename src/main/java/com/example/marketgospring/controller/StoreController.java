@@ -25,6 +25,11 @@ public class StoreController {
         return storeRepository.findAll();
     }
 
+    @GetMapping(value = "/{storeId}")
+    public Optional<Store> pickOne(@PathVariable("storeId")Long storeId) {
+        return storeRepository.findById(storeId);
+    }
+
     @PostMapping
     public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketName") String marketName) {
         final Store store = Store.builder()

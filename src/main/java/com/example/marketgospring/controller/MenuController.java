@@ -24,9 +24,12 @@ public class MenuController {
     public Iterable<Menu> list() {
         return menuRepository.findAll();
     }
-
-    @GetMapping(value = "/storeId")
-    public List<Menu> findByStoreId (@RequestParam("storeId") Long storeId) {
+    @GetMapping(value = "/{menuId}")
+    public Optional<Menu> pickOne(@PathVariable("menuId")Long menuId) {
+        return menuRepository.findById(menuId);
+    }
+    @GetMapping(value = "/storeId/{storeId}")
+    public List<Menu> findByStoreId (@PathVariable("storeId") Long storeId) {
         return menuRepository.findByStoreId(storeId);
     }
 

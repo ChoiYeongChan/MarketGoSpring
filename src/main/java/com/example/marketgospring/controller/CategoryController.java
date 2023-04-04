@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,6 +22,10 @@ public class CategoryController {
     @GetMapping(value = "/all")
     public Iterable<Category> list() {
         return categoryRepository.findAll();
+    }
+    @GetMapping(value = "/{categoryId}")
+    public Optional<Category> pickOne(@PathVariable("categoryId")Long categoryId) {
+        return categoryRepository.findById(categoryId);
     }
 
     @PostMapping

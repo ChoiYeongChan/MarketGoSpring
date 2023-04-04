@@ -25,13 +25,13 @@ public class MarketReviewController {
     public Iterable<MarketReview> list() {
         return marketReviewRepository.findAll();
     }
-    @GetMapping(value = "/marketId")
-    public List<MarketReview> findByMarketId (@RequestParam("marketId")Long marketId) {
+    @GetMapping(value = "/marketId/{marketId}")
+    public List<MarketReview> findByMarketId (@PathVariable("marketId")Long marketId) {
         return marketReviewRepository.findByMarketId(marketId);
     }
 
-    @GetMapping(value = "/memberId")
-    public List<MarketReview> findByMemberId (@RequestParam("memberId")Long memberId) {
+    @GetMapping(value = "/memberId/{memberId}")
+    public List<MarketReview> findByMemberId (@PathVariable("memberId")Long memberId) {
         return marketReviewRepository.findByMemberId(memberId);
     }
 

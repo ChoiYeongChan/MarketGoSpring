@@ -24,6 +24,10 @@ public class CartController {
     public Iterable<Cart> list() {
         return cartRepository.findAll();
     }
+    @GetMapping(value = "/{cartId}")
+    public Optional<Cart> pickOne(@PathVariable("cartId") Long cartId) {
+        return cartRepository.findById(cartId);
+    }
     @PostMapping
     public Cart put(@RequestParam("goodsId1") Long goodsId1, @RequestParam("goodsId2") Long goodsId2, @RequestParam("goodsId3") Long goodsId3, @RequestParam("goodsId4") Long goodsId4, @RequestParam("goodsId5") Long goodsId5, @RequestParam("goodsId6") Long goodsId6, @RequestParam("goodsId7") Long goodsId7, @RequestParam("goodsId8") Long goodsId8, @RequestParam("goodsId9") Long goodsId9, @RequestParam("goodsId10") Long goodsId10) {
         final Cart cart=Cart.builder()

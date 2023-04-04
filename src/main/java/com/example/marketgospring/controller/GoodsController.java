@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -29,7 +30,14 @@ public class GoodsController {
     public Optional<Goods> findOne(@PathVariable ("goodsId") Long goodsId) {
         return goodsRepository.findById(goodsId);
     }
-
+    @GetMapping(value = "/storeId/{storeId}")
+    public List<Goods> findByStoreId(@PathVariable ("storeId") Long storeId) {
+        return goodsRepository.findByStoreId(storeId);
+    }
+    @GetMapping(value = "/marketId/{marketId}")
+    public List<Goods> findByMarketId(@PathVariable("marketId") Long marketId) {
+        return goodsRepository.findByMarketId(marketId);
+    }
     @PostMapping
     public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Long marketId, @RequestParam("storeId") Long storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
         LocalDateTime now=LocalDateTime.now();

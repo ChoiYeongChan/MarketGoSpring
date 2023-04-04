@@ -25,7 +25,7 @@ public class MarketController {
         return marketRepository.findAll();
     }
 
-    @GetMapping(value="/id/{marketId}")
+    @GetMapping(value="/{marketId}")
     public Optional<Market> findOne(@PathVariable("marketId") Long id) {
         return marketRepository.findById(id);
     }
