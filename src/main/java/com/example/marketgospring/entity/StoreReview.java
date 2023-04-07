@@ -16,8 +16,9 @@ public class StoreReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long storeReviewId;
-    @Column
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store storeId;
     @Column
     private Long memberId;
     @Column

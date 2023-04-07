@@ -18,16 +18,22 @@ public class Goods {
     private Long goodsId;
     @Column
     private String goodsName;
-    @Column
-    private Long marketId;
-    @Column
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "marketId")
+    private Market goodsMarket;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store goodsStore;
+    @OneToOne
+    @JoinColumn(name="fileId")
+    private S3File goodsFile;
     @Column
     private int goodsPrice;
     @Column
     private String goodsUnit;
-    @Column
-    private String goodsCategory;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category goodsCategory;
     @Column
     private String goodsInfo;
     @Column

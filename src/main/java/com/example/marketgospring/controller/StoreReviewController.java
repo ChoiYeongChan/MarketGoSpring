@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.entity.StoreReview;
 import com.example.marketgospring.repository.StoreReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class StoreReviewController {
     }
 
     @PostMapping
-    public StoreReview put(@RequestParam("storeId")Long storeId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
+    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
         final StoreReview storeReview=StoreReview.builder()
                 .storeId(storeId)
                 .memberId(memberId)

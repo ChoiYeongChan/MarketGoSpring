@@ -32,6 +32,7 @@ public class Store {
     private String localAvail;
     @Column
     private int storeNum;
-    @Column
-    private String marketName;
+    @ManyToOne
+    @JoinColumn(name = "marketId")
+    private Market marketId;
 }

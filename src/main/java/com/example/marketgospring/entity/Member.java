@@ -18,12 +18,15 @@ public class Member {
     private String memberToken;
     @Column
     private String memberName;
-    @Column
-    private String interestMarket;
-    @Column
-    private Long cartId;
-    @Column
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "marketId")
+    private Market interestMarket;
+    @OneToOne
+    @JoinColumn(name = "cartId")
+    private Cart cartId;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store storeId;
     @Column
     private double recentLatitude;
     @Column

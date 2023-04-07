@@ -15,8 +15,9 @@ import java.time.LocalDateTime;
 public class MarketReview {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long marketReviewId;
-    @Column
-    private Long marketId;
+    @ManyToOne
+    @JoinColumn(name = "marketId")
+    private Market marketId;
     @Column
     private Long memberId;
     @Column

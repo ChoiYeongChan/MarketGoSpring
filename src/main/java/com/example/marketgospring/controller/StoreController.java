@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class StoreController {
     }
 
     @PostMapping
-    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketName") String marketName) {
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId) {
         final Store store = Store.builder()
                 .storeName(storeName)
                 .storeAddress1(storeAddress1)
@@ -42,13 +43,13 @@ public class StoreController {
                 .cardAvail(cardAvail)
                 .localAvail(localAvail)
                 .storeNum(storeNum)
-                .marketName(marketName)
+                .marketId(marketId)
                 .build();
         return storeRepository.save(store);
     }
 
     @PutMapping(value = "/{storeId}")
-    public Store update(@PathVariable("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketName") String marketName) {
+    public Store update(@PathVariable("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId) {
         Optional<Store> store=storeRepository.findById(storeId);
         store.get().setStoreName(storeName);
         store.get().setStoreAddress1(storeAddress1);
@@ -59,7 +60,7 @@ public class StoreController {
         store.get().setCardAvail(cardAvail);
         store.get().setLocalAvail(localAvail);
         store.get().setStoreNum(storeNum);
-        store.get().setMarketName(marketName);
+        store.get().setMarketId(marketId);
         return storeRepository.save(store.get());
     }
 

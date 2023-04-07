@@ -1,6 +1,8 @@
 package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Goods;
+import com.example.marketgospring.entity.Market;
+import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.repository.GoodsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +41,12 @@ public class GoodsController {
         return goodsRepository.findByMarketId(marketId);
     }
     @PostMapping
-    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Long marketId, @RequestParam("storeId") Long storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
         LocalDateTime now=LocalDateTime.now();
         final Goods goods=Goods.builder()
                 .goodsName(goodsName)
-                .marketId(marketId)
-                .storeId(storeId)
+                .goodsMarket(marketId)
+                .goodsStore(storeId)
                 .goodsPrice(goodsPrice)
                 .goodsUnit(goodsUnit)
                 .goodsCategory(goodsCategory)
@@ -57,11 +59,11 @@ public class GoodsController {
     }
 
     @PutMapping(value = "/{goodsId}")
-    public Goods update(@PathVariable ("goodsId") Long goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Long marketId, @RequestParam("storeId") Long storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods update(@PathVariable ("goodsId") Long goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
         Optional<Goods> goods=goodsRepository.findById(goodsId);
         goods.get().setGoodsName(goodsName);
-        goods.get().setMarketId(marketId);
-        goods.get().setStoreId(storeId);
+        goods.get().setGoodsMarket(marketId);
+        goods.get().setGoodsStore(storeId);
         goods.get().setGoodsPrice(goodsPrice);
         goods.get().setGoodsUnit(goodsUnit);
         goods.get().setGoodsCategory(goodsCategory);

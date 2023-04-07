@@ -16,8 +16,9 @@ public class Menu {
     private Long menuId;
     @Column
     private String menuName;
-    @Column
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store menuStore;
     @Column
     private Long goodsId1;
     @Column
