@@ -1,6 +1,7 @@
 package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Cart;
+import com.example.marketgospring.entity.Goods;
 import com.example.marketgospring.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CartController {
         return cartRepository.findById(cartId);
     }
     @PostMapping
-    public Cart put(@RequestParam("goodsId1") Long goodsId1, @RequestParam("goodsId2") Long goodsId2, @RequestParam("goodsId3") Long goodsId3, @RequestParam("goodsId4") Long goodsId4, @RequestParam("goodsId5") Long goodsId5, @RequestParam("goodsId6") Long goodsId6, @RequestParam("goodsId7") Long goodsId7, @RequestParam("goodsId8") Long goodsId8, @RequestParam("goodsId9") Long goodsId9, @RequestParam("goodsId10") Long goodsId10) {
+    public Cart put(@RequestParam("goodsId1") Goods goodsId1, @RequestParam("goodsId2") Goods goodsId2, @RequestParam("goodsId3") Goods goodsId3, @RequestParam("goodsId4") Goods goodsId4, @RequestParam("goodsId5") Goods goodsId5, @RequestParam("goodsId6") Goods goodsId6, @RequestParam("goodsId7") Goods goodsId7, @RequestParam("goodsId8") Goods goodsId8, @RequestParam("goodsId9") Goods goodsId9, @RequestParam("goodsId10") Goods goodsId10) {
         final Cart cart=Cart.builder()
                 .cartDate(LocalDateTime.now())
                 .goodsId1(goodsId1)
@@ -46,7 +47,7 @@ public class CartController {
         return cartRepository.save(cart);
     }
     @PutMapping(value = "/{cartId}")
-    public Cart update(@PathVariable ("cartId") Long cartId, @RequestParam("goodsId1") Long goodsId1, @RequestParam("goodsId2") Long goodsId2, @RequestParam("goodsId3") Long goodsId3, @RequestParam("goodsId4") Long goodsId4, @RequestParam("goodsId5") Long goodsId5, @RequestParam("goodsId6") Long goodsId6, @RequestParam("goodsId7") Long goodsId7, @RequestParam("goodsId8") Long goodsId8, @RequestParam("goodsId9") Long goodsId9, @RequestParam("goodsId10") Long goodsId10) {
+    public Cart update(@PathVariable ("cartId") Long cartId, @RequestParam("goodsId1") Goods goodsId1, @RequestParam("goodsId2") Goods goodsId2, @RequestParam("goodsId3") Goods goodsId3, @RequestParam("goodsId4") Goods goodsId4, @RequestParam("goodsId5") Goods goodsId5, @RequestParam("goodsId6") Goods goodsId6, @RequestParam("goodsId7") Goods goodsId7, @RequestParam("goodsId8") Goods goodsId8, @RequestParam("goodsId9") Goods goodsId9, @RequestParam("goodsId10") Goods goodsId10) {
         Optional<Cart> cart=cartRepository.findById(cartId);
         cart.get().setCartDate(LocalDateTime.now());
         cart.get().setGoodsId1(goodsId1);

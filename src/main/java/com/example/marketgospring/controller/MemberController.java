@@ -1,6 +1,9 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Cart;
+import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.Member;
+import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +34,7 @@ public class MemberController {
         return memberRepository.findByMemberToken(memberToken);
     }
     @PostMapping
-    public Member put(@RequestParam ("memberToken") String memberToken, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+    public Member put(@RequestParam ("memberToken") String memberToken, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
         final Member member= Member.builder()
                 .memberToken(memberToken)
                 .memberName(memberName)
@@ -44,7 +47,7 @@ public class MemberController {
         return memberRepository.save(member);
     }
     @PutMapping(value = "/{memberId}")
-    public Member update(@PathVariable("memberId") Long memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") String interestMarket, @RequestParam("cartId") Long cartId, @RequestParam("storeId") Long storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+    public Member update(@PathVariable("memberId") Long memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
         Optional<Member> member = memberRepository.findById(memberId);
         member.get().setMemberName(memberName);
         member.get().setInterestMarket(interestMarket);

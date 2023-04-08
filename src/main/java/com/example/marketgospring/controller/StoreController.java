@@ -1,6 +1,7 @@
 package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Market;
+import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class StoreController {
     }
 
     @PostMapping
-    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId) {
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         final Store store = Store.builder()
                 .storeName(storeName)
                 .storeAddress1(storeAddress1)
@@ -44,12 +45,13 @@ public class StoreController {
                 .localAvail(localAvail)
                 .storeNum(storeNum)
                 .marketId(marketId)
+                .storeFile(storeFile)
                 .build();
         return storeRepository.save(store);
     }
 
     @PutMapping(value = "/{storeId}")
-    public Store update(@PathVariable("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId) {
+    public Store update(@PathVariable("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         Optional<Store> store=storeRepository.findById(storeId);
         store.get().setStoreName(storeName);
         store.get().setStoreAddress1(storeAddress1);
@@ -61,6 +63,7 @@ public class StoreController {
         store.get().setLocalAvail(localAvail);
         store.get().setStoreNum(storeNum);
         store.get().setMarketId(marketId);
+        store.get().setStoreFile(storeFile);
         return storeRepository.save(store.get());
     }
 

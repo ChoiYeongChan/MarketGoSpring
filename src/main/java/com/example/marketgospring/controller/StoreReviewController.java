@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.entity.StoreReview;
 import com.example.marketgospring.repository.StoreReviewRepository;
@@ -38,7 +39,7 @@ public class StoreReviewController {
     }
 
     @PostMapping
-    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
+    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         final StoreReview storeReview=StoreReview.builder()
                 .storeId(storeId)
                 .memberId(memberId)
@@ -46,16 +47,18 @@ public class StoreReviewController {
                 .ratings(ratings)
                 .reviewContent(reviewContent)
                 .reviewDate(LocalDateTime.now())
+                .storeReviewFile(storeReviewFile)
                 .build();
         return storeReviewRepository.save(storeReview);
     }
 
     @PutMapping(value = "/{storeReviewId}")
-    public StoreReview update(@PathVariable("storeReviewId")Long storeReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
+    public StoreReview update(@PathVariable("storeReviewId")Long storeReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         Optional<StoreReview> storeReview=storeReviewRepository.findById(storeReviewId);
         storeReview.get().setRatings(ratings);
         storeReview.get().setReviewContent(reviewContent);
         storeReview.get().setReviewDate(LocalDateTime.now());
+        storeReview.get().setStoreReviewFile(storeReviewFile);
         return storeReviewRepository.save(storeReview.get());
     }
 

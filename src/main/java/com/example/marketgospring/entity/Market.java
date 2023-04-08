@@ -38,5 +38,7 @@ public class Market {
     private String marketPhonenum;
     @Column
     private String marketGiftcard;
-
+    @OneToOne
+    @JoinColumn(name = "market_file")
+    private S3File marketFile;
 }

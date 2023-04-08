@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Category;
 import com.example.marketgospring.entity.Goods;
 import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.Store;
@@ -29,19 +30,19 @@ public class GoodsController {
     }
 
     @GetMapping(value = "/{goodsId}")
-    public Optional<Goods> findOne(@PathVariable ("goodsId") Long goodsId) {
+    public Optional<Goods> findByGoodsId(@PathVariable ("goodsId") Long goodsId) {
         return goodsRepository.findById(goodsId);
-    }
+    }/*
     @GetMapping(value = "/storeId/{storeId}")
-    public List<Goods> findByStoreId(@PathVariable ("storeId") Long storeId) {
+    public Optional<Goods> findByStoreId(@PathVariable ("storeId") Long storeId) {
         return goodsRepository.findByStoreId(storeId);
     }
     @GetMapping(value = "/marketId/{marketId}")
-    public List<Goods> findByMarketId(@PathVariable("marketId") Long marketId) {
+    public Optional<Goods> findByMarketId(@PathVariable("marketId") Long marketId) {
         return goodsRepository.findByMarketId(marketId);
-    }
+    }*/
     @PostMapping
-    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
         LocalDateTime now=LocalDateTime.now();
         final Goods goods=Goods.builder()
                 .goodsName(goodsName)
@@ -59,7 +60,7 @@ public class GoodsController {
     }
 
     @PutMapping(value = "/{goodsId}")
-    public Goods update(@PathVariable ("goodsId") Long goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") String goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods update(@PathVariable ("goodsId") Long goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
         Optional<Goods> goods=goodsRepository.findById(goodsId);
         goods.get().setGoodsName(goodsName);
         goods.get().setGoodsMarket(marketId);

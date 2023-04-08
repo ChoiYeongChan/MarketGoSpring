@@ -19,20 +19,20 @@ public class Goods {
     @Column
     private String goodsName;
     @ManyToOne
-    @JoinColumn(name = "marketId")
+    @JoinColumn(name = "goods_market")
     private Market goodsMarket;
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "goods_store")
     private Store goodsStore;
     @OneToOne
-    @JoinColumn(name="fileId")
+    @JoinColumn(name="goods_file")
     private S3File goodsFile;
     @Column
     private int goodsPrice;
     @Column
     private String goodsUnit;
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "goods_category")
     private Category goodsCategory;
     @Column
     private String goodsInfo;

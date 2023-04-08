@@ -35,4 +35,7 @@ public class Store {
     @ManyToOne
     @JoinColumn(name = "marketId")
     private Market marketId;
+    @OneToOne
+    @JoinColumn(name = "store_file")
+    private S3File storeFile;
 }

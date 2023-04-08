@@ -2,6 +2,7 @@ package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.MarketReview;
+import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.repository.MarketReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class MarketReviewController {
     }
 
     @PostMapping
-    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
+    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
                 .marketId(marketId)
                 .memberId(memberId)
@@ -45,16 +46,18 @@ public class MarketReviewController {
                 .ratings(ratings)
                 .reviewContent(reviewContent)
                 .reviewDate(LocalDateTime.now())
+                .marketReviewFile(marketReviewFile)
                 .build();
         return marketReviewRepository.save(marketReview);
     }
 
     @PutMapping(value = "/{marketReviewId}")
-    public MarketReview update(@PathVariable("marketReviewId")Long marketReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent) {
+    public MarketReview update(@PathVariable("marketReviewId")Long marketReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         Optional<MarketReview> marketReview=marketReviewRepository.findById(marketReviewId);
         marketReview.get().setRatings(ratings);
         marketReview.get().setReviewContent(reviewContent);
         marketReview.get().setReviewDate(LocalDateTime.now());
+        marketReview.get().setMarketReviewFile(marketReviewFile);
         return marketReviewRepository.save(marketReview.get());
     }
 

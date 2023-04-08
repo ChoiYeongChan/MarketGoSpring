@@ -29,4 +29,7 @@ public class StoreReview {
     private String reviewContent;
     @Column
     private LocalDateTime reviewDate;
+    @OneToOne
+    @JoinColumn(name = "store_review_file")
+    private S3File storeReviewFile;
 }

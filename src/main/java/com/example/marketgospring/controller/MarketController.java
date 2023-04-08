@@ -1,6 +1,7 @@
 package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Market;
+import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.repository.MarketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class MarketController {
         return marketRepository.findByMarketLocation(marketLocation);
     }
     @PostMapping
-    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard) {
+    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
         final Market market=Market.builder()
                 .marketName(marketName)
                 .marketAddress1(marketAddress1)
@@ -53,11 +54,12 @@ public class MarketController {
                 .toilet(toilet)
                 .marketPhonenum(marketPhonenum)
                 .marketGiftcard(marketGiftcard)
+                .marketFile(marketFile)
                 .build();
         return marketRepository.save(market);
     }
     @PutMapping(value = "/{marketId}")
-    public Market update(@PathVariable("marketId") Long marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard) {
+    public Market update(@PathVariable("marketId") Long marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
         Optional<Market> market=marketRepository.findById(marketId);
         market.get().setMarketName(marketName);
         market.get().setMarketAddress1(marketAddress1);
@@ -71,6 +73,7 @@ public class MarketController {
         market.get().setToilet(toilet);
         market.get().setMarketPhonenum(marketPhonenum);
         market.get().setMarketGiftcard(marketGiftcard);
+        market.get().setMarketFile(marketFile);
         return marketRepository.save(market.get());
     }
 

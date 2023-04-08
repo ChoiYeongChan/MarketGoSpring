@@ -19,13 +19,13 @@ public class Member {
     @Column
     private String memberName;
     @ManyToOne
-    @JoinColumn(name = "marketId")
+    @JoinColumn(name = "interest_market")
     private Market interestMarket;
     @OneToOne
-    @JoinColumn(name = "cartId")
+    @JoinColumn(name = "cart_id")
     private Cart cartId;
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store_id")
     private Store storeId;
     @Column
     private double recentLatitude;

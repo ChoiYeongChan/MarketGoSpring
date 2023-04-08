@@ -28,4 +28,7 @@ public class MarketReview {
     private String reviewContent;
     @Column
     private LocalDateTime reviewDate;
+    @OneToOne
+    @JoinColumn(name = "market_review_file")
+    private S3File marketReviewFile;
 }
