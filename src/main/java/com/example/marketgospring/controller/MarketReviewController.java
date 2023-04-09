@@ -2,6 +2,7 @@ package com.example.marketgospring.controller;
 
 import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.MarketReview;
+import com.example.marketgospring.entity.Member;
 import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.repository.MarketReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class MarketReviewController {
     }
 
     @PostMapping
-    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
+    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
                 .marketId(marketId)
                 .memberId(memberId)

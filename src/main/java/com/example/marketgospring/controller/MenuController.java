@@ -30,10 +30,10 @@ public class MenuController {
     public Optional<Menu> pickOne(@PathVariable("menuId")Long menuId) {
         return menuRepository.findById(menuId);
     }
-    /*@GetMapping(value = "/storeId/{storeId}")
+    @GetMapping(value = "/storeId/{storeId}")
     public List<Menu> findByStoreId (@PathVariable("storeId") Long storeId) {
-        return menuRepository.findByStoreId(storeId);
-    }*/
+        return menuRepository.findByMenuStore(storeId);
+    }
 
     @PostMapping
     public Menu put(@RequestParam("menuName") String menuName, @RequestParam("storeId") Store storeId, @RequestParam("goodsId1")Goods goodsId1, @RequestParam("goodsId2") Goods goodsId2, @RequestParam("goodsId3") Goods goodsId3, @RequestParam("goodsId4") Goods goodsId4, @RequestParam("goodsId5") Goods goodsId5, @RequestParam("goodsId6") Goods goodsId6, @RequestParam("goodsId7")Goods goodsId7, @RequestParam("goodsId8") Goods goodsId8, @RequestParam("goodsId9") Goods goodsId9, @RequestParam("goodsId10") Goods goodsId10) {

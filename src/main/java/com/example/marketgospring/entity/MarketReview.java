@@ -18,8 +18,9 @@ public class MarketReview {
     @ManyToOne
     @JoinColumn(name = "marketId")
     private Market marketId;
-    @Column
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "memberId")
+    private Member memberId;
     @Column
     private String memberName;
     @Column

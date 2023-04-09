@@ -64,10 +64,10 @@ public class AmazonS3Service {
                 amazonS3Client.putObject(
                         new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata));
 
-                // TODO : 외부에 공개하는 파일인 경우 Public Read 권한을 추가, ACL 확인
+                /* TODO : 외부에 공개하는 파일인 경우 Public Read 권한을 추가, ACL 확인
                 amazonS3Client.putObject(
                         new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
+                .withCannedAcl(CannedAccessControlList.PublicRead));*/
 
                 // S3에 업로드한 폴더 및 파일 URL
                 uploadFileUrl = amazonS3Client.getUrl(bucketName, keyName).toString();

@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Member;
 import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.entity.Store;
 import com.example.marketgospring.entity.StoreReview;
@@ -39,7 +40,7 @@ public class StoreReviewController {
     }
 
     @PostMapping
-    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId")Long memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
+    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         final StoreReview storeReview=StoreReview.builder()
                 .storeId(storeId)
                 .memberId(memberId)

@@ -18,7 +18,7 @@ public class Menu {
     @Column
     private String menuName;
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "menu_store")
     private Store menuStore;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "goods_id1")

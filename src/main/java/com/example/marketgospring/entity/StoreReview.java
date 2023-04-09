@@ -19,8 +19,9 @@ public class StoreReview {
     @ManyToOne
     @JoinColumn(name = "storeId")
     private Store storeId;
-    @Column
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "store_review_member")
+    private Member memberId;
     @Column
     private String memberName;
     @Column
