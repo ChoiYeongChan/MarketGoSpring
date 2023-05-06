@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface MarketReviewRepository extends JpaRepository<MarketReview, Long> {
+public interface MarketReviewRepository extends JpaRepository<MarketReview, Integer> {
     List<MarketReview> findByMarketId(Long marketId);
 
     List<MarketReview> findByMemberId(Long memberId);

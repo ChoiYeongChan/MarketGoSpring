@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "marketreview")
 public class MarketReview {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long marketReviewId;
+    private Integer marketReviewId;
     @ManyToOne
     @JoinColumn(name = "marketId")
     private Market marketId;
@@ -24,7 +24,7 @@ public class MarketReview {
     @Column
     private String memberName;
     @Column
-    private double ratings;
+    private Float ratings;
     @Column
     private String reviewContent;
     @Column

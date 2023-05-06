@@ -27,7 +27,7 @@ public class MarketController {
     }
 
     @GetMapping(value="/{marketId}")
-    public Optional<Market> findOne(@PathVariable("marketId") Long id) {
+    public Optional<Market> findOne(@PathVariable("marketId") Integer id) {
         return marketRepository.findById(id);
     }
 
@@ -40,7 +40,7 @@ public class MarketController {
         return marketRepository.findByMarketLocation(marketLocation);
     }
     @PostMapping
-    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
+    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketRatings") Float marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
         final Market market=Market.builder()
                 .marketName(marketName)
                 .marketAddress1(marketAddress1)
@@ -59,7 +59,7 @@ public class MarketController {
         return marketRepository.save(market);
     }
     @PutMapping(value = "/{marketId}")
-    public Market update(@PathVariable("marketId") Long marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") double marketLatitude, @RequestParam("marketLongitude") double marketLongitude, @RequestParam("marketRatings") double marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
+    public Market update(@PathVariable("marketId") Integer marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketRatings") Float marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile) {
         Optional<Market> market=marketRepository.findById(marketId);
         market.get().setMarketName(marketName);
         market.get().setMarketAddress1(marketAddress1);
@@ -78,7 +78,7 @@ public class MarketController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("marketId") Long marketId) {
+    public void delete(@RequestParam("marketId") Integer marketId) {
         marketRepository.deleteById(marketId);
     }
 }

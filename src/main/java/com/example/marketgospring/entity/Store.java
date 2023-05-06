@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "store")
 public class Store {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long storeId;
+    private Integer storeId;
     @Column
     private String storeName;
     @Column
@@ -21,7 +21,7 @@ public class Store {
     @Column
     private String storeAddress2;
     @Column
-    private double storeRatings;
+    private Float storeRatings;
     @Column
     private String storePhonenum;
     @Column
@@ -31,7 +31,7 @@ public class Store {
     @Column
     private String localAvail;
     @Column
-    private int storeNum;
+    private Integer storeNum;
     @ManyToOne
     @JoinColumn(name = "marketId")
     private Market marketId;

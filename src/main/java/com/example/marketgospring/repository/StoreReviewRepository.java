@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface StoreReviewRepository extends JpaRepository<StoreReview, Long> {
-    List<StoreReview> findByStoreId(Long storeId);
+public interface StoreReviewRepository extends JpaRepository<StoreReview, Integer> {
+    List<StoreReview> findByStoreId(Integer storeId);
 
-    List<StoreReview> findByMemberId(Long memberId);
+    List<StoreReview> findByMemberId(Integer memberId);
 }

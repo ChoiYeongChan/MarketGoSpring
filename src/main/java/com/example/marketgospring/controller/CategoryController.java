@@ -24,7 +24,7 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
     @GetMapping(value = "/{categoryId}")
-    public Optional<Category> pickOne(@PathVariable("categoryId")Long categoryId) {
+    public Optional<Category> pickOne(@PathVariable("categoryId")Integer categoryId) {
         return categoryRepository.findById(categoryId);
     }
 
@@ -37,14 +37,14 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{categoryId}")
-    public Category update(@PathVariable("categoryId") Long categoryId, @RequestParam("categoryName") String categoryName) {
+    public Category update(@PathVariable("categoryId") Integer categoryId, @RequestParam("categoryName") String categoryName) {
         Optional<Category> category=categoryRepository.findById(categoryId);
         category.get().setCategoryName(categoryName);
         return categoryRepository.save(category.get());
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("categoryId") Long categoryId) {
+    public void delete(@RequestParam("categoryId") Integer categoryId) {
         categoryRepository.deleteById(categoryId);
     }
 }

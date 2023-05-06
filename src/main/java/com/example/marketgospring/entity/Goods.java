@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "goods")
 public class Goods {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long goodsId;
+    private Integer goodsId;
     @Column
     private String goodsName;
     @ManyToOne
@@ -28,7 +28,7 @@ public class Goods {
     @JoinColumn(name="goods_file")
     private S3File goodsFile;
     @Column
-    private int goodsPrice;
+    private Integer goodsPrice;
     @Column
     private String goodsUnit;
     @ManyToOne
@@ -41,5 +41,5 @@ public class Goods {
     @Column
     private String goodsOrigin;
     @Column
-    private int isAvail;
+    private Integer isAvail;
 }

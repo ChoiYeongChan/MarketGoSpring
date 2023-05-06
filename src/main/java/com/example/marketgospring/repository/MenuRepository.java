@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface MenuRepository extends JpaRepository <Menu, Long> {
+public interface MenuRepository extends JpaRepository <Menu, Integer> {
 
-    List<Menu> findByMenuStore(Long storeId);
+    List<Menu> findByMenuStore(Integer storeId);
     //List<Menu> findByStoreId(Long storeId);
 }

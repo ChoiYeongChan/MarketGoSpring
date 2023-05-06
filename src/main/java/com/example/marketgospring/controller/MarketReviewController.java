@@ -39,7 +39,7 @@ public class MarketReviewController {
     }
 
     @PostMapping
-    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
+    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
                 .marketId(marketId)
                 .memberId(memberId)
@@ -53,7 +53,7 @@ public class MarketReviewController {
     }
 
     @PutMapping(value = "/{marketReviewId}")
-    public MarketReview update(@PathVariable("marketReviewId")Long marketReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
+    public MarketReview update(@PathVariable("marketReviewId")Integer marketReviewId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         Optional<MarketReview> marketReview=marketReviewRepository.findById(marketReviewId);
         marketReview.get().setRatings(ratings);
         marketReview.get().setReviewContent(reviewContent);
@@ -63,7 +63,7 @@ public class MarketReviewController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("marketReviewId")Long marketReviewId) {
+    public void delete(@RequestParam("marketReviewId")Integer marketReviewId) {
         marketReviewRepository.deleteById(marketReviewId);
     }
 }

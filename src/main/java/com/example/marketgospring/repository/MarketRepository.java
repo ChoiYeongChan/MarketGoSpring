@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MarketRepository extends JpaRepository<Market, Long> {
+public interface MarketRepository extends JpaRepository<Market, Integer> {
     List<Market> findByMarketName(String marketName);
 
     List<Market> findByMarketLocation(String marketLocation);

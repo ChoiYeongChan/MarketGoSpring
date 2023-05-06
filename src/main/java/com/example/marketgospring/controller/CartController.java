@@ -26,7 +26,7 @@ public class CartController {
         return cartRepository.findAll();
     }
     @GetMapping(value = "/{cartId}")
-    public Optional<Cart> pickOne(@PathVariable("cartId") Long cartId) {
+    public Optional<Cart> pickOne(@PathVariable("cartId") Integer cartId) {
         return cartRepository.findById(cartId);
     }
     @PostMapping
@@ -47,7 +47,7 @@ public class CartController {
         return cartRepository.save(cart);
     }
     @PutMapping(value = "/{cartId}")
-    public Cart update(@PathVariable ("cartId") Long cartId, @RequestParam("goodsId1") Goods goodsId1, @RequestParam("goodsId2") Goods goodsId2, @RequestParam("goodsId3") Goods goodsId3, @RequestParam("goodsId4") Goods goodsId4, @RequestParam("goodsId5") Goods goodsId5, @RequestParam("goodsId6") Goods goodsId6, @RequestParam("goodsId7") Goods goodsId7, @RequestParam("goodsId8") Goods goodsId8, @RequestParam("goodsId9") Goods goodsId9, @RequestParam("goodsId10") Goods goodsId10) {
+    public Cart update(@PathVariable ("cartId") Integer cartId, @RequestParam("goodsId1") Goods goodsId1, @RequestParam("goodsId2") Goods goodsId2, @RequestParam("goodsId3") Goods goodsId3, @RequestParam("goodsId4") Goods goodsId4, @RequestParam("goodsId5") Goods goodsId5, @RequestParam("goodsId6") Goods goodsId6, @RequestParam("goodsId7") Goods goodsId7, @RequestParam("goodsId8") Goods goodsId8, @RequestParam("goodsId9") Goods goodsId9, @RequestParam("goodsId10") Goods goodsId10) {
         Optional<Cart> cart=cartRepository.findById(cartId);
         cart.get().setCartDate(LocalDateTime.now());
         cart.get().setGoodsId1(goodsId1);
@@ -63,7 +63,7 @@ public class CartController {
         return cartRepository.save(cart.get());
     }
     @DeleteMapping
-    public void deleteCart(@RequestParam("cartId")Long cartId) {
+    public void deleteCart(@RequestParam("cartId")Integer cartId) {
         cartRepository.deleteById(cartId);
     }
 }

@@ -27,11 +27,11 @@ public class MenuController {
         return menuRepository.findAll();
     }
     @GetMapping(value = "/{menuId}")
-    public Optional<Menu> pickOne(@PathVariable("menuId")Long menuId) {
+    public Optional<Menu> pickOne(@PathVariable("menuId")Integer menuId) {
         return menuRepository.findById(menuId);
     }
     @GetMapping(value = "/storeId/{storeId}")
-    public List<Menu> findByStoreId (@PathVariable("storeId") Long storeId) {
+    public List<Menu> findByStoreId (@PathVariable("storeId") Integer storeId) {
         return menuRepository.findByMenuStore(storeId);
     }
 
@@ -54,7 +54,7 @@ public class MenuController {
                 return menuRepository.save(menu);
     }
     @PutMapping(value = ("/{menuId}"))
-    public Menu update(@PathVariable("menuId") Long menuId, @RequestParam("menuName") String menuName, @RequestParam("storeId") Store storeId, @RequestParam("goodsId1") Goods goodsId1,@RequestParam("goodsId2") Goods goodsId2,@RequestParam("goodsId3")Goods goodsId3,@RequestParam("goodsId4") Goods goodsId4,@RequestParam("goodsId5") Goods goodsId5,@RequestParam("goodsId6") Goods goodsId6,@RequestParam("goodsId7") Goods goodsId7,@RequestParam("goodsId8") Goods goodsId8,@RequestParam("goodsId9") Goods goodsId9,@RequestParam("goodsId10") Goods goodsId10) {
+    public Menu update(@PathVariable("menuId") Integer menuId, @RequestParam("menuName") String menuName, @RequestParam("storeId") Store storeId, @RequestParam("goodsId1") Goods goodsId1,@RequestParam("goodsId2") Goods goodsId2,@RequestParam("goodsId3")Goods goodsId3,@RequestParam("goodsId4") Goods goodsId4,@RequestParam("goodsId5") Goods goodsId5,@RequestParam("goodsId6") Goods goodsId6,@RequestParam("goodsId7") Goods goodsId7,@RequestParam("goodsId8") Goods goodsId8,@RequestParam("goodsId9") Goods goodsId9,@RequestParam("goodsId10") Goods goodsId10) {
         Optional<Menu> menu=menuRepository.findById(menuId);
         menu.get().setMenuName(menuName);
         menu.get().setMenuStore(storeId);
@@ -71,7 +71,7 @@ public class MenuController {
         return menuRepository.save(menu.get());
     }
     @DeleteMapping
-    public void delete(@RequestParam("menuId")Long menuId) {
+    public void delete(@RequestParam("menuId")Integer menuId) {
         menuRepository.deleteById(menuId);
     }
 }

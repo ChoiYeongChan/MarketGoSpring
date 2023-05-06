@@ -23,7 +23,7 @@ public class S3FileController {
         return s3FileRepository.findAll();
     }
     @GetMapping(value = "/{fileId}")
-    public Optional<S3File> findOne(@PathVariable("fileId")Long fileId) {
+    public Optional<S3File> findOne(@PathVariable("fileId")Integer fileId) {
         return s3FileRepository.findById(fileId);
     }
 

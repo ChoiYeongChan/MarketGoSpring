@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "member")
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Integer memberId;
     @Column
     private String memberToken;
     @Column
@@ -28,7 +28,7 @@ public class Member {
     @JoinColumn(name = "store_id")
     private Store storeId;
     @Column
-    private double recentLatitude;
+    private Float recentLatitude;
     @Column
-    private double recentLongitude;
+    private Float recentLongitude;
 }

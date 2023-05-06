@@ -26,7 +26,7 @@ public class MemberController {
         return memberRepository.findAll();
     }
     @GetMapping(value = "/{memberId}")
-    public Optional<Member> findOne(@PathVariable ("memberId") Long memberId) {
+    public Optional<Member> findOne(@PathVariable ("memberId") Integer memberId) {
         return memberRepository.findById(memberId);
     }
     @GetMapping(value = "/memberToken/{memberToken}")
@@ -34,7 +34,7 @@ public class MemberController {
         return memberRepository.findByMemberToken(memberToken);
     }
     @PostMapping
-    public Member put(@RequestParam ("memberToken") String memberToken, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+    public Member put(@RequestParam ("memberToken") String memberToken, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") Float recentLatitude, @RequestParam("recentLongitude") Float recentLongitude) {
         final Member member= Member.builder()
                 .memberToken(memberToken)
                 .memberName(memberName)
@@ -47,7 +47,7 @@ public class MemberController {
         return memberRepository.save(member);
     }
     @PutMapping(value = "/{memberId}")
-    public Member update(@PathVariable("memberId") Long memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") double recentLatitude, @RequestParam("recentLongitude") double recentLongitude) {
+    public Member update(@PathVariable("memberId") Integer memberId, @RequestParam("memberName") String memberName, @RequestParam("interestMarket") Market interestMarket, @RequestParam("cartId") Cart cartId, @RequestParam("storeId") Store storeId, @RequestParam("recentLatitude") Float recentLatitude, @RequestParam("recentLongitude") Float recentLongitude) {
         Optional<Member> member = memberRepository.findById(memberId);
         member.get().setMemberName(memberName);
         member.get().setInterestMarket(interestMarket);
@@ -58,7 +58,7 @@ public class MemberController {
         return memberRepository.save(member.get());
     }
     @DeleteMapping
-    public void delete(@RequestParam("memberId") Long memberId) {
+    public void delete(@RequestParam("memberId") Integer memberId) {
         memberRepository.deleteById(memberId);
     }
 }

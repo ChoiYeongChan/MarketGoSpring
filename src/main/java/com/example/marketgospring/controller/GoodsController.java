@@ -30,7 +30,7 @@ public class GoodsController {
     }
 
     @GetMapping(value = "/{goodsId}")
-    public Optional<Goods> findByGoodsId(@PathVariable ("goodsId") Long goodsId) {
+    public Optional<Goods> findByGoodsId(@PathVariable ("goodsId") Integer goodsId) {
         return goodsRepository.findById(goodsId);
     }/*
     @GetMapping(value = "/storeId/{storeId}")
@@ -42,7 +42,7 @@ public class GoodsController {
         return goodsRepository.findByMarketId(marketId);
     }*/
     @PostMapping
-    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
         LocalDateTime now=LocalDateTime.now();
         final Goods goods=Goods.builder()
                 .goodsName(goodsName)
@@ -60,7 +60,7 @@ public class GoodsController {
     }
 
     @PutMapping(value = "/{goodsId}")
-    public Goods update(@PathVariable ("goodsId") Long goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") int goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") int isAvail) {
+    public Goods update(@PathVariable ("goodsId") Integer goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
         Optional<Goods> goods=goodsRepository.findById(goodsId);
         goods.get().setGoodsName(goodsName);
         goods.get().setGoodsMarket(marketId);
@@ -77,7 +77,7 @@ public class GoodsController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("goodsId") Long goodsId) {
+    public void delete(@RequestParam("goodsId") Integer goodsId) {
         goodsRepository.deleteById(goodsId);
     }
 }

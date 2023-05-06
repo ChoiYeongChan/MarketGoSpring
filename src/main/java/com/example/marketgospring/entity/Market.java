@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "market")
 public class Market {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long marketId;
+    private Integer marketId;
     @Column
     private String marketName;
     @Column
@@ -23,11 +23,11 @@ public class Market {
     @Column
     private String marketLocation;
     @Column
-    private double marketLatitude;
+    private Float marketLatitude;
     @Column
-    private double marketLongitude;
+    private Float marketLongitude;
     @Column
-    private double marketRatings;
+    private Float marketRatings;
     @Column
     private String marketInfo;
     @Column

@@ -28,12 +28,12 @@ public class StoreController {
     }
 
     @GetMapping(value = "/{storeId}")
-    public Optional<Store> pickOne(@PathVariable("storeId")Long storeId) {
+    public Optional<Store> pickOne(@PathVariable("storeId")Integer storeId) {
         return storeRepository.findById(storeId);
     }
 
     @PostMapping
-    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         final Store store = Store.builder()
                 .storeName(storeName)
                 .storeAddress1(storeAddress1)
@@ -51,7 +51,7 @@ public class StoreController {
     }
 
     @PutMapping(value = "/{storeId}")
-    public Store update(@PathVariable("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") double storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") int storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store update(@PathVariable("storeId") Integer storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         Optional<Store> store=storeRepository.findById(storeId);
         store.get().setStoreName(storeName);
         store.get().setStoreAddress1(storeAddress1);
@@ -68,7 +68,7 @@ public class StoreController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("storeId")Long storeId) {
+    public void delete(@RequestParam("storeId")Integer storeId) {
         storeRepository.deleteById(storeId);
     }
 }

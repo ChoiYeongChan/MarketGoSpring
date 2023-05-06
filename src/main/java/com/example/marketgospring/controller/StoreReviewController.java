@@ -30,17 +30,17 @@ public class StoreReviewController {
         return storeReviewRepository.findAll();
     }
     @GetMapping(value = "/storeId/{storeId}")
-    public List<StoreReview> findByStoreId (@PathVariable("storeId")Long storeId) {
+    public List<StoreReview> findByStoreId (@PathVariable("storeId")Integer storeId) {
         return storeReviewRepository.findByStoreId(storeId);
     }
 
     @GetMapping(value = "/memberId/{memberId}")
-    public List<StoreReview> findByMemberId (@PathVariable("memberId")Long memberId) {
+    public List<StoreReview> findByMemberId (@PathVariable("memberId")Integer memberId) {
         return storeReviewRepository.findByMemberId(memberId);
     }
 
     @PostMapping
-    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
+    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         final StoreReview storeReview=StoreReview.builder()
                 .storeId(storeId)
                 .memberId(memberId)
@@ -54,7 +54,7 @@ public class StoreReviewController {
     }
 
     @PutMapping(value = "/{storeReviewId}")
-    public StoreReview update(@PathVariable("storeReviewId")Long storeReviewId, @RequestParam("ratings")double ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
+    public StoreReview update(@PathVariable("storeReviewId")Integer storeReviewId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         Optional<StoreReview> storeReview=storeReviewRepository.findById(storeReviewId);
         storeReview.get().setRatings(ratings);
         storeReview.get().setReviewContent(reviewContent);
@@ -64,7 +64,7 @@ public class StoreReviewController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam("storeReviewId")Long storeReviewId) {
+    public void delete(@RequestParam("storeReviewId")Integer storeReviewId) {
         storeReviewRepository.deleteById(storeReviewId);
     }
 }
