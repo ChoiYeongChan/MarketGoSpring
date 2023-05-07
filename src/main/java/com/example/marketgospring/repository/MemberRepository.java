@@ -8,8 +8,5 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
-
-    void deleteByMemberId(Long memberId);
-
     Optional<Member> findByMemberToken(String memberToken);
 }

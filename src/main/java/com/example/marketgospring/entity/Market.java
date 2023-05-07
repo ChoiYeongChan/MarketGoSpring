@@ -3,6 +3,7 @@ package com.example.marketgospring.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -38,7 +39,14 @@ public class Market {
     private String marketPhonenum;
     @Column
     private String marketGiftcard;
+    @Column
+    private String marketType;
+    @Column
+    private LocalDateTime updateTime;
     @OneToOne
     @JoinColumn(name = "market_file")
     private S3File marketFile;
+    @OneToOne
+    @JoinColumn(name = "market_map")
+    private S3File marketMap;
 }

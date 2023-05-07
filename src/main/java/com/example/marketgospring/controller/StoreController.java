@@ -1,5 +1,6 @@
 package com.example.marketgospring.controller;
 
+import com.example.marketgospring.entity.Category;
 import com.example.marketgospring.entity.Market;
 import com.example.marketgospring.entity.S3File;
 import com.example.marketgospring.entity.Store;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -32,37 +34,44 @@ public class StoreController {
         return storeRepository.findById(storeId);
     }
 
+    @GetMapping(value = "/storeName")
+    public List<Store> findByStore(@RequestParam("storeName") String storeName) {
+        return storeRepository.findByStoreName(storeName);
+    }
+
     @PostMapping
-    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         final Store store = Store.builder()
                 .storeName(storeName)
                 .storeAddress1(storeAddress1)
                 .storeAddress2(storeAddress2)
+                .storeCategory(storeCategory)
                 .storeRatings(storeRatings)
                 .storePhonenum(storePhonenum)
                 .storeInfo(storeInfo)
                 .cardAvail(cardAvail)
                 .localAvail(localAvail)
                 .storeNum(storeNum)
-                .marketId(marketId)
+                .storeMarketId(marketId)
                 .storeFile(storeFile)
                 .build();
         return storeRepository.save(store);
     }
 
     @PutMapping(value = "/{storeId}")
-    public Store update(@PathVariable("storeId") Integer storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store update(@PathVariable("storeId") Integer storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         Optional<Store> store=storeRepository.findById(storeId);
         store.get().setStoreName(storeName);
         store.get().setStoreAddress1(storeAddress1);
         store.get().setStoreAddress2(storeAddress2);
+        store.get().setStoreCategory(storeCategory);
         store.get().setStoreRatings(storeRatings);
         store.get().setStorePhonenum(storePhonenum);
         store.get().setStoreInfo(storeInfo);
         store.get().setCardAvail(cardAvail);
         store.get().setLocalAvail(localAvail);
         store.get().setStoreNum(storeNum);
-        store.get().setMarketId(marketId);
+        store.get().setStoreMarketId(marketId);
         store.get().setStoreFile(storeFile);
         return storeRepository.save(store.get());
     }

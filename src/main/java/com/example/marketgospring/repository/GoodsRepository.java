@@ -9,7 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface GoodsRepository extends JpaRepository <Goods, Integer> {
-    //Optional<Goods> findByStoreId(Long storeId);
 
-    //Optional<Goods> findByMarketId(Long marketId);
 }

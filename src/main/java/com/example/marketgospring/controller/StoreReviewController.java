@@ -29,13 +29,13 @@ public class StoreReviewController {
     public Iterable<StoreReview> list() {
         return storeReviewRepository.findAll();
     }
-    @GetMapping(value = "/storeId/{storeId}")
-    public List<StoreReview> findByStoreId (@PathVariable("storeId")Integer storeId) {
+    @GetMapping(value = "/storeId")
+    public List<StoreReview> findByStoreId (@RequestParam("storeId") Integer storeId) {
         return storeReviewRepository.findByStoreId(storeId);
     }
 
-    @GetMapping(value = "/memberId/{memberId}")
-    public List<StoreReview> findByMemberId (@PathVariable("memberId")Integer memberId) {
+    @GetMapping(value = "/memberId")
+    public List<StoreReview> findByMemberId (@RequestParam("memberId") Integer memberId) {
         return storeReviewRepository.findByMemberId(memberId);
     }
 

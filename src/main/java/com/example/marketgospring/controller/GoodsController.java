@@ -42,7 +42,7 @@ public class GoodsController {
         return goodsRepository.findByMarketId(marketId);
     }*/
     @PostMapping
-    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
+    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
         LocalDateTime now=LocalDateTime.now();
         final Goods goods=Goods.builder()
                 .goodsName(goodsName)
@@ -50,7 +50,6 @@ public class GoodsController {
                 .goodsStore(storeId)
                 .goodsPrice(goodsPrice)
                 .goodsUnit(goodsUnit)
-                .goodsCategory(goodsCategory)
                 .goodsInfo(goodsInfo)
                 .updateTime(now)
                 .goodsOrigin(goodsOrigin)
@@ -60,14 +59,13 @@ public class GoodsController {
     }
 
     @PutMapping(value = "/{goodsId}")
-    public Goods update(@PathVariable ("goodsId") Integer goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsCategory") Category goodsCategory, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
+    public Goods update(@PathVariable ("goodsId") Integer goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
         Optional<Goods> goods=goodsRepository.findById(goodsId);
         goods.get().setGoodsName(goodsName);
         goods.get().setGoodsMarket(marketId);
         goods.get().setGoodsStore(storeId);
         goods.get().setGoodsPrice(goodsPrice);
         goods.get().setGoodsUnit(goodsUnit);
-        goods.get().setGoodsCategory(goodsCategory);
         goods.get().setGoodsInfo(goodsInfo);
         LocalDateTime now=LocalDateTime.now();
         goods.get().setUpdateTime(now);

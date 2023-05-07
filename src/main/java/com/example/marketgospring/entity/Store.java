@@ -20,6 +20,9 @@ public class Store {
     private String storeAddress1;
     @Column
     private String storeAddress2;
+    @ManyToOne
+    @JoinColumn(name = "store_category")
+    private Category storeCategory;
     @Column
     private Float storeRatings;
     @Column
@@ -33,8 +36,8 @@ public class Store {
     @Column
     private Integer storeNum;
     @ManyToOne
-    @JoinColumn(name = "marketId")
-    private Market marketId;
+    @JoinColumn(name = "store_market_id")
+    private Market storeMarketId;
     @OneToOne
     @JoinColumn(name = "store_file")
     private S3File storeFile;

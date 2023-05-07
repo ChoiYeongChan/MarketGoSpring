@@ -31,9 +31,6 @@ public class Goods {
     private Integer goodsPrice;
     @Column
     private String goodsUnit;
-    @ManyToOne
-    @JoinColumn(name = "goods_category")
-    private Category goodsCategory;
     @Column
     private String goodsInfo;
     @Column
