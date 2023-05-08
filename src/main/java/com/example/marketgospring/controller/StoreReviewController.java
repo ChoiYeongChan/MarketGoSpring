@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value="/storereview")
+@RequestMapping(value="/storeReview")
 public class StoreReviewController {
 
     private StoreReviewRepository storeReviewRepository;
@@ -29,14 +29,14 @@ public class StoreReviewController {
     public Iterable<StoreReview> list() {
         return storeReviewRepository.findAll();
     }
-    @GetMapping(value = "/storeId")
-    public List<StoreReview> findByStoreId (@RequestParam("storeId") Integer storeId) {
-        return storeReviewRepository.findByStoreId(storeId);
+    @GetMapping(value = "/storeId/{storeId}")
+    public List<StoreReview> findByStoreId (@PathVariable("storeId") Integer storeId) {
+        return storeReviewRepository.findBySrStoreId(storeId);
     }
 
-    @GetMapping(value = "/memberId")
-    public List<StoreReview> findByMemberId (@RequestParam("memberId") Integer memberId) {
-        return storeReviewRepository.findByMemberId(memberId);
+    @GetMapping(value = "/memberId/{memberId}")
+    public List<StoreReview> findByMemberId (@PathVariable("memberId") Integer memberId) {
+        return storeReviewRepository.findByStoreReviewMemberId(memberId);
     }
 
     @PostMapping

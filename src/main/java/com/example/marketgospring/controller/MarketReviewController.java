@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value="/marketreview")
+@RequestMapping(value="/marketReview")
 public class MarketReviewController {
     private MarketReviewRepository marketReviewRepository;
 
@@ -28,21 +28,22 @@ public class MarketReviewController {
     public Iterable<MarketReview> list() {
         return marketReviewRepository.findAll();
     }
+
     @GetMapping(value = "/marketId/{marketId}")
-    public List<MarketReview> findByMarketId (@PathVariable("marketId")Long marketId) {
-        return marketReviewRepository.findByMarketId(marketId);
+    public List<MarketReview> findByMarketId(@PathVariable("marketId") Integer marketId) {
+        return marketReviewRepository.findByMrMarketId(marketId);
     }
 
     @GetMapping(value = "/memberId/{memberId}")
-    public List<MarketReview> findByMemberId (@PathVariable("memberId")Long memberId) {
-        return marketReviewRepository.findByMemberId(memberId);
+    public List<MarketReview> findByMemberId (@PathVariable("memberId")Integer MemberId) {
+        return marketReviewRepository.findByMrMemberId(MemberId);
     }
 
     @PostMapping
     public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
-                .marketId(marketId)
-                .memberId(memberId)
+                .mrMarketId(marketId)
+                .mrMemberId(memberId)
                 .memberName(memberName)
                 .ratings(ratings)
                 .reviewContent(reviewContent)

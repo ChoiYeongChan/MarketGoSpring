@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "marketreview")
+@Table(name = "market_review")
 public class MarketReview {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer marketReviewId;
     @ManyToOne
-    @JoinColumn(name = "marketId")
-    private Market marketId;
+    @JoinColumn(name = "mr_market_id")
+    private Market mrMarketId;
     @ManyToOne
-    @JoinColumn(name = "memberId")
-    private Member memberId;
+    @JoinColumn(name = "mr_member_id")
+    private Member mrMemberId;
     @Column
     private String memberName;
     @Column

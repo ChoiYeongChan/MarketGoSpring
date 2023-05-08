@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "storereview")
+@Table(name = "store_review")
 public class StoreReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storeReviewId;
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "sr_store_id")
     private Store storeId;
     @ManyToOne
     @JoinColumn(name = "store_review_member")

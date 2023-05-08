@@ -34,9 +34,19 @@ public class StoreController {
         return storeRepository.findById(storeId);
     }
 
-    @GetMapping(value = "/storeName")
-    public List<Store> findByStore(@RequestParam("storeName") String storeName) {
+    @GetMapping(value = "/storeName/{storeName}")
+    public List<Store> findByStore(@PathVariable("storeName") String storeName) {
         return storeRepository.findByStoreName(storeName);
+    }
+
+    @GetMapping(value = "/marketId/{marketId}")
+    public List<Store> findByStoreMarketId(@PathVariable("marketId") Integer storeMarketId) {
+        return storeRepository.findByStoreMarketId(storeMarketId);
+    }
+
+    @GetMapping(value = "/storeCategory/{storeCategory}")
+    public List<Store> findByStoreCategory(@PathVariable("storeCategory") String storeCategory) {
+        return storeRepository.findByStoreCategory(storeCategory);
     }
 
     @PostMapping
