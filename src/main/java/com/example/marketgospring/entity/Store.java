@@ -41,4 +41,6 @@ public class Store {
     @OneToOne
     @JoinColumn(name = "store_file")
     private S3File storeFile;
+    @Column
+    private Integer reviewCount;
 }

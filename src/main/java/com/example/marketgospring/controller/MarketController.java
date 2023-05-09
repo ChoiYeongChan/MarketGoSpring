@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping(value="/market")
 public class MarketController {
 
-    private MarketRepository marketRepository;
+    public MarketRepository marketRepository;
     @Autowired
     public MarketController(MarketRepository marketRepository) {
         this.marketRepository = marketRepository;
@@ -41,7 +41,7 @@ public class MarketController {
         return marketRepository.findByMarketLocation(marketLocation);
     }
     @PostMapping
-    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketType") String marketType,@RequestParam("marketRatings") Float marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile, @RequestParam("marketMap")S3File marketMap) {
+    public Market put(@RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketType") String marketType, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile, @RequestParam("marketMap")S3File marketMap) {
         LocalDateTime now=LocalDateTime.now();
         final Market market=Market.builder()
                 .marketName(marketName)
@@ -50,7 +50,7 @@ public class MarketController {
                 .marketLocation(marketLocation)
                 .marketLatitude(marketLatitude)
                 .marketLongitude(marketLongitude)
-                .marketRatings(marketRatings)
+                .marketRatings(0.0F)
                 .marketType(marketType)
                 .marketInfo(marketInfo)
                 .parking(parking)
@@ -60,11 +60,12 @@ public class MarketController {
                 .marketGiftcard(marketGiftcard)
                 .marketFile(marketFile)
                 .marketMap(marketMap)
+                .reviewCount(0)
                 .build();
         return marketRepository.save(market);
     }
     @PutMapping(value = "/{marketId}")
-    public Market update(@PathVariable("marketId") Integer marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketType") String marketType,@RequestParam("marketRatings") Float marketRatings, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile, @RequestParam("marketMap")S3File marketMap) {
+    public Market update(@PathVariable("marketId") Integer marketId, @RequestParam("marketName") String marketName, @RequestParam("marketAddress1") String marketAddress1, @RequestParam("marketAddress2") String marketAddress2, @RequestParam("marketLocation") String marketLocation, @RequestParam("marketLatitude") Float marketLatitude, @RequestParam("marketLongitude") Float marketLongitude, @RequestParam("marketType") String marketType, @RequestParam("marketInfo") String marketInfo, @RequestParam("parking") String parking, @RequestParam("toilet") String toilet, @RequestParam("marketPhonenum") String marketPhonenum, @RequestParam("marketGiftcard") String marketGiftcard, @RequestParam("marketFile")S3File marketFile, @RequestParam("marketMap")S3File marketMap) {
         LocalDateTime now=LocalDateTime.now();
         Optional<Market> market=marketRepository.findById(marketId);
         market.get().setMarketName(marketName);
@@ -73,7 +74,6 @@ public class MarketController {
         market.get().setMarketLocation(marketLocation);
         market.get().setMarketLatitude(marketLatitude);
         market.get().setMarketLongitude(marketLongitude);
-        market.get().setMarketRatings(marketRatings);
         market.get().setMarketInfo(marketInfo);
         market.get().setParking(parking);
         market.get().setToilet(toilet);
@@ -90,4 +90,5 @@ public class MarketController {
     public void delete(@RequestParam("marketId") Integer marketId) {
         marketRepository.deleteById(marketId);
     }
+
 }

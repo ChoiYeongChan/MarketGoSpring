@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class MarketReviewController {
     public MarketReviewController(MarketReviewRepository marketReviewRepository) {
         this.marketReviewRepository=marketReviewRepository;
     }
+
 
     @GetMapping(value = "/all")
     public Iterable<MarketReview> list() {
@@ -39,6 +41,7 @@ public class MarketReviewController {
         return marketReviewRepository.findByMrMemberId(MemberId);
     }
 
+    @Transactional
     @PostMapping
     public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
@@ -50,6 +53,8 @@ public class MarketReviewController {
                 .reviewDate(LocalDateTime.now())
                 .marketReviewFile(marketReviewFile)
                 .build();
+        marketReviewRepository.addMarketReview(marketId.getMarketId());
+        //marketReviewRepository.setMarketRatings(marketId.getMarketId());
         return marketReviewRepository.save(marketReview);
     }
 
@@ -63,8 +68,13 @@ public class MarketReviewController {
         return marketReviewRepository.save(marketReview.get());
     }
 
+    @Transactional
     @DeleteMapping
     public void delete(@RequestParam("marketReviewId")Integer marketReviewId) {
+        Optional<Market> market = marketReviewRepository.findByMarketReviewId(marketReviewId);
         marketReviewRepository.deleteById(marketReviewId);
+        marketReviewRepository.subMarketReview(market.get().getMarketId());
     }
+
+
 }

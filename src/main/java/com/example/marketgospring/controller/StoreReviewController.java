@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class StoreReviewController {
         return storeReviewRepository.findByStoreReviewMemberId(memberId);
     }
 
+    @Transactional
     @PostMapping
     public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         final StoreReview storeReview=StoreReview.builder()
@@ -50,6 +52,7 @@ public class StoreReviewController {
                 .reviewDate(LocalDateTime.now())
                 .storeReviewFile(storeReviewFile)
                 .build();
+        storeReviewRepository.addStoreReview(storeId.getStoreId());
         return storeReviewRepository.save(storeReview);
     }
 
@@ -63,8 +66,11 @@ public class StoreReviewController {
         return storeReviewRepository.save(storeReview.get());
     }
 
+    @Transactional
     @DeleteMapping
     public void delete(@RequestParam("storeReviewId")Integer storeReviewId) {
+        Optional<Store> store=storeReviewRepository.findByStoreReviewId(storeReviewId);
         storeReviewRepository.deleteById(storeReviewId);
+        storeReviewRepository.subStoreReview(store.get().getStoreId());
     }
 }

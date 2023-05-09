@@ -49,4 +49,6 @@ public class Market {
     @OneToOne
     @JoinColumn(name = "market_map")
     private S3File marketMap;
+    @Column
+    private Integer reviewCount;
 }
