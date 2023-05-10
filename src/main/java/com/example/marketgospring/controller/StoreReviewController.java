@@ -42,11 +42,10 @@ public class StoreReviewController {
 
     @Transactional
     @PostMapping
-    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
+    public StoreReview put(@RequestParam("storeId") Store storeId, @RequestParam("memberId") Member memberId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         final StoreReview storeReview=StoreReview.builder()
                 .storeId(storeId)
                 .memberId(memberId)
-                .memberName(memberName)
                 .ratings(ratings)
                 .reviewContent(reviewContent)
                 .reviewDate(LocalDateTime.now())

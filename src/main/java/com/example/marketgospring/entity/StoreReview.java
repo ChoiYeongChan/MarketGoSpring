@@ -23,8 +23,6 @@ public class StoreReview {
     @JoinColumn(name = "store_review_member")
     private Member memberId;
     @Column
-    private String memberName;
-    @Column
     private Float ratings;
     @Column
     private String reviewContent;

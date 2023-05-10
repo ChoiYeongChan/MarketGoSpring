@@ -50,13 +50,13 @@ public class StoreController {
     }
 
     @PostMapping
-    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store put(@RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         final Store store = Store.builder()
                 .storeName(storeName)
                 .storeAddress1(storeAddress1)
                 .storeAddress2(storeAddress2)
                 .storeCategory(storeCategory)
-                .storeRatings(storeRatings)
+                .storeRatings(0.0F)
                 .storePhonenum(storePhonenum)
                 .storeInfo(storeInfo)
                 .cardAvail(cardAvail)
@@ -69,13 +69,12 @@ public class StoreController {
     }
 
     @PutMapping(value = "/{storeId}")
-    public Store update(@PathVariable("storeId") Integer storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storeRatings") Float storeRatings, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
+    public Store update(@PathVariable("storeId") Integer storeId, @RequestParam("storeName") String storeName, @RequestParam("storeAddress1") String storeAddress1, @RequestParam("storeAddress2") String storeAddress2, @RequestParam("storeCategory")Category storeCategory, @RequestParam("storePhonenum") String storePhonenum, @RequestParam("storeInfo") String storeInfo, @RequestParam("cardAvail") String cardAvail, @RequestParam("localAvail") String localAvail, @RequestParam("storeNum") Integer storeNum, @RequestParam("marketId") Market marketId, @RequestParam("storeFile")S3File storeFile) {
         Optional<Store> store=storeRepository.findById(storeId);
         store.get().setStoreName(storeName);
         store.get().setStoreAddress1(storeAddress1);
         store.get().setStoreAddress2(storeAddress2);
         store.get().setStoreCategory(storeCategory);
-        store.get().setStoreRatings(storeRatings);
         store.get().setStorePhonenum(storePhonenum);
         store.get().setStoreInfo(storeInfo);
         store.get().setCardAvail(cardAvail);

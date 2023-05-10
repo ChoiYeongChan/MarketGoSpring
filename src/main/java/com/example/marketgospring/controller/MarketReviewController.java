@@ -43,11 +43,10 @@ public class MarketReviewController {
 
     @Transactional
     @PostMapping
-    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("memberName")String memberName, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
+    public MarketReview put(@RequestParam("marketId") Market marketId, @RequestParam("memberId") Member memberId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         final MarketReview marketReview=MarketReview.builder()
                 .mrMarketId(marketId)
                 .mrMemberId(memberId)
-                .memberName(memberName)
                 .ratings(ratings)
                 .reviewContent(reviewContent)
                 .reviewDate(LocalDateTime.now())

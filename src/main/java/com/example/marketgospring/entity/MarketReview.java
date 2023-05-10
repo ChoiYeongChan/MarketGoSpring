@@ -22,8 +22,6 @@ public class MarketReview {
     @JoinColumn(name = "mr_member_id")
     private Member mrMemberId;
     @Column
-    private String memberName;
-    @Column
     private Float ratings;
     @Column
     private String reviewContent;

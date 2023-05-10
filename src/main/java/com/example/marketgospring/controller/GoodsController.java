@@ -57,7 +57,7 @@ public class GoodsController {
     }
 
     @PutMapping(value = "/{goodsId}")
-    public Goods update(@PathVariable ("goodsId") Integer goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
+    public Goods update(@PathVariable ("goodsId") Integer goodsId, @RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail, @RequestParam("goodsFile")S3File goodsFile) {
         Optional<Goods> goods=goodsRepository.findById(goodsId);
         goods.get().setGoodsName(goodsName);
         goods.get().setGoodsMarket(marketId);
@@ -69,6 +69,7 @@ public class GoodsController {
         goods.get().setUpdateTime(now);
         goods.get().setGoodsOrigin(goodsOrigin);
         goods.get().setIsAvail(isAvail);
+        goods.get().setGoodsFile(goodsFile);
         return goodsRepository.save(goods.get());
     }
 
