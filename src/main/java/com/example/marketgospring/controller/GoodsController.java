@@ -1,9 +1,6 @@
 package com.example.marketgospring.controller;
 
-import com.example.marketgospring.entity.Category;
-import com.example.marketgospring.entity.Goods;
-import com.example.marketgospring.entity.Market;
-import com.example.marketgospring.entity.Store;
+import com.example.marketgospring.entity.*;
 import com.example.marketgospring.repository.GoodsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +39,7 @@ public class GoodsController {
         return goodsRepository.findByMarketId(marketId);
     }*/
     @PostMapping
-    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail) {
+    public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail, @RequestParam("goodsFile")S3File goodsFile) {
         LocalDateTime now=LocalDateTime.now();
         final Goods goods=Goods.builder()
                 .goodsName(goodsName)
@@ -54,6 +51,7 @@ public class GoodsController {
                 .updateTime(now)
                 .goodsOrigin(goodsOrigin)
                 .isAvail(isAvail)
+                .goodsFile(goodsFile)
                 .build();
         return goodsRepository.save(goods);
     }
