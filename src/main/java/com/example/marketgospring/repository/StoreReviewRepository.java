@@ -30,4 +30,8 @@ public interface StoreReviewRepository extends JpaRepository<StoreReview, Intege
 
     @Query(value = "select sr.storeId from StoreReview sr where sr.storeReviewId=:storeReviewId")
     Optional<Store> findByStoreReviewId(@Param("storeReviewId") Integer storeReviewId);
+
+    @Modifying
+    @Query(value = "update Store s set s.storeRatings=(select avg(sr.ratings) from StoreReview sr where sr.storeId.storeId=:storeId) where s.storeId=:storeId")
+    void setStoreRatings(@Param("storeId") Integer storeId);
 }

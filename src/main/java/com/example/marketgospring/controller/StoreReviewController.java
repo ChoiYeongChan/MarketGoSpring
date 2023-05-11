@@ -52,6 +52,8 @@ public class StoreReviewController {
                 .storeReviewFile(storeReviewFile)
                 .build();
         storeReviewRepository.addStoreReview(storeId.getStoreId());
+        storeReviewRepository.save(storeReview);
+        storeReviewRepository.setStoreRatings(storeId.getStoreId());
         return storeReviewRepository.save(storeReview);
     }
 
@@ -62,6 +64,8 @@ public class StoreReviewController {
         storeReview.get().setReviewContent(reviewContent);
         storeReview.get().setReviewDate(LocalDateTime.now());
         storeReview.get().setStoreReviewFile(storeReviewFile);
+        storeReviewRepository.save(storeReview.get());
+        storeReviewRepository.setStoreRatings(storeReview.get().getStoreId().getStoreId());
         return storeReviewRepository.save(storeReview.get());
     }
 
@@ -71,5 +75,6 @@ public class StoreReviewController {
         Optional<Store> store=storeReviewRepository.findByStoreReviewId(storeReviewId);
         storeReviewRepository.deleteById(storeReviewId);
         storeReviewRepository.subStoreReview(store.get().getStoreId());
+        storeReviewRepository.setStoreRatings(store.get().getStoreId());
     }
 }

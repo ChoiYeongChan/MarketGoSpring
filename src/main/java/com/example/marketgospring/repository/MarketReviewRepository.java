@@ -31,6 +31,7 @@ public interface MarketReviewRepository extends JpaRepository<MarketReview, Inte
     Optional<Market> findByMarketReviewId(@Param("marketReviewId") Integer marketReviewId);
 
     @Modifying
-    @Query(value = "update Market m set m.marketRatings=(select avg(mr.ratings) from MarketReview mr where mr.mrMarketId=:marketId) where m.marketId=:marketId")
+    @Query(value = "update Market m set m.marketRatings=(select avg(mr.ratings) from MarketReview mr where mr.mrMarketId.marketId=:marketId) where m.marketId=:marketId")
     void setMarketRatings(@Param("marketId") Integer marketId);
+
 }

@@ -53,7 +53,8 @@ public class MarketReviewController {
                 .marketReviewFile(marketReviewFile)
                 .build();
         marketReviewRepository.addMarketReview(marketId.getMarketId());
-        //marketReviewRepository.setMarketRatings(marketId.getMarketId());
+        marketReviewRepository.save(marketReview);
+        marketReviewRepository.setMarketRatings(marketId.getMarketId());
         return marketReviewRepository.save(marketReview);
     }
 
@@ -64,6 +65,8 @@ public class MarketReviewController {
         marketReview.get().setReviewContent(reviewContent);
         marketReview.get().setReviewDate(LocalDateTime.now());
         marketReview.get().setMarketReviewFile(marketReviewFile);
+        marketReviewRepository.save(marketReview.get());
+        marketReviewRepository.setMarketRatings(marketReview.get().getMrMarketId().getMarketId());
         return marketReviewRepository.save(marketReview.get());
     }
 
@@ -73,7 +76,7 @@ public class MarketReviewController {
         Optional<Market> market = marketReviewRepository.findByMarketReviewId(marketReviewId);
         marketReviewRepository.deleteById(marketReviewId);
         marketReviewRepository.subMarketReview(market.get().getMarketId());
+        marketReviewRepository.setMarketRatings(market.get().getMarketId());
     }
-
 
 }
