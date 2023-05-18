@@ -64,6 +64,7 @@ public class StoreController {
                 .storeNum(storeNum)
                 .storeMarketId(marketId)
                 .storeFile(storeFile)
+                .reviewCount(0)
                 .build();
         return storeRepository.save(store);
     }
