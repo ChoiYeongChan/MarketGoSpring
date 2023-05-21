@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,6 +24,11 @@ public class MartPriceController {
     @GetMapping(value = "/all")
     public Iterable<MartPrice> list() {
         return martPriceRepository.findAll();
+    }
+
+    @GetMapping(value = "/{goodsName}")
+    public List<MartPrice> findByGoodsNameContaining(@PathVariable("goodsName") String goodsName) {
+        return martPriceRepository.findByGoodsNameContains(goodsName);
     }
 
     @PostMapping

@@ -1,6 +1,8 @@
 package com.example.marketgospring.entity;
 
 import lombok.*;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -15,7 +17,10 @@ public class GoodsData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer goodsDataId;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="goods_data")
-    private Goods goodsData;
+    @Column
+    private Integer goodsId;
+    @Column
+    private Integer price;
+    @Column
+    private LocalDateTime updatedDate;
 }
