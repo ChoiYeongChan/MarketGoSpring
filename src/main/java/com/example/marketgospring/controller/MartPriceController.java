@@ -51,8 +51,8 @@ public class MartPriceController {
         return martPriceRepository.save(martPrice.get());
     }
 
-    @DeleteMapping(value = "/{martPriceId}")
-    public void delete(@PathVariable("martPriceId") Integer martPriceId) {
+    @DeleteMapping
+    public void delete(@RequestParam("martPriceId") Integer martPriceId) {
         martPriceRepository.deleteById(martPriceId);
     }
 }

@@ -46,8 +46,8 @@ public class GoodsDataController {
         return goodsDataRepository.save(goodsData.get());
     }
 
-    @DeleteMapping(value = "/{goodsId}")
-    public void delete(@PathVariable("goodsId") Integer goodsId) {
+    @DeleteMapping
+    public void delete(@RequestParam("goodsId") Integer goodsId) {
         goodsDataRepository.deleteById(goodsId);
     }
 }
