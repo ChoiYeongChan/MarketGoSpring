@@ -21,7 +21,7 @@ public class MartPrice {
     @Column
     private Integer price;
     @Column
-    private String unit;
+    private String source;
     @Column
     private LocalDateTime updateTime;
 }

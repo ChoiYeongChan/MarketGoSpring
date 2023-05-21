@@ -32,21 +32,21 @@ public class MartPriceController {
     }
 
     @PostMapping
-    public MartPrice put(@RequestParam("goodsName") String goodsName, @RequestParam("price") Integer price, @RequestParam("unit") String unit) {
+    public MartPrice put(@RequestParam("goodsName") String goodsName, @RequestParam("price") Integer price, @RequestParam("source") String source) {
         final MartPrice martPrice=MartPrice.builder()
                 .goodsName(goodsName)
                 .price(price)
-                .unit(unit)
+                .source(source)
                 .updateTime(LocalDateTime.now())
                 .build();
         return martPriceRepository.save(martPrice);
     }
     @PutMapping(value = "/{martPriceId}")
-    public MartPrice update(@PathVariable("martPriceId") Integer martPriceId,@RequestParam("goodsName") String goodsName, @RequestParam("price") Integer price, @RequestParam("unit") String unit) {
+    public MartPrice update(@PathVariable("martPriceId") Integer martPriceId,@RequestParam("goodsName") String goodsName, @RequestParam("price") Integer price, @RequestParam("source") String source) {
         Optional<MartPrice> martPrice=martPriceRepository.findById(martPriceId);
         martPrice.get().setGoodsName(goodsName);
         martPrice.get().setPrice(price);
-        martPrice.get().setUnit(unit);
+        martPrice.get().setSource(source);
         martPrice.get().setUpdateTime(LocalDateTime.now());
         return martPriceRepository.save(martPrice.get());
     }
