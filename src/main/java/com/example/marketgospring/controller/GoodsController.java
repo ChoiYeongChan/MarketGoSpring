@@ -31,6 +31,11 @@ public class GoodsController {
         return goodsRepository.findById(goodsId);
     }
 
+    @GetMapping(value = "/storeId/{storeId}")
+    public List<Goods> findByStoreId(@PathVariable ("storeId") Integer storeId) {
+        return goodsRepository.findByStoreId(storeId);
+    }
+
     @PostMapping
     public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail, @RequestParam("goodsFile")S3File goodsFile) {
         LocalDateTime now=LocalDateTime.now();
