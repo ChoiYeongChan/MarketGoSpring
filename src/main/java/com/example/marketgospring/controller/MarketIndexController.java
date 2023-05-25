@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value="/market_index")
+@RequestMapping(value="/marketIndex")
 public class MarketIndexController {
     public MarketIndexRepository marketIndexRepository;
 
