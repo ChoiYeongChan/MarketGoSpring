@@ -49,26 +49,6 @@ public class Cart {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "goods_id10")
     private Goods goodsId10;
-    /*@Column
-    private Long goodsId1;
-    @Column
-    private Long goodsId2;
-    @Column
-    private Long goodsId3;
-    @Column
-    private Long goodsId4;
-    @Column
-    private Long goodsId5;
-    @Column
-    private Long goodsId6;
-    @Column
-    private Long goodsId7;
-    @Column
-    private Long goodsId8;
-    @Column
-    private Long goodsId9;
-    @Column
-    private Long goodsId10;*/
     @Column
     private Integer unit1;
     @Column
