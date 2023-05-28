@@ -3,10 +3,9 @@ package com.example.marketgospring.controller;
 import com.example.marketgospring.entity.GoodsData;
 import com.example.marketgospring.repository.GoodsDataRepository;
 import lombok.RequiredArgsConstructor;
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value="/goodsData")
 public class GoodsDataController {
-    public GoodsDataRepository goodsDataRepository;
+    private GoodsDataRepository goodsDataRepository;
 
     @Autowired
     public GoodsDataController(GoodsDataRepository goodsDataRepository) {this.goodsDataRepository=goodsDataRepository;}
@@ -30,7 +29,7 @@ public class GoodsDataController {
     @PostMapping
     public GoodsData put(@RequestParam("goodsId") Integer goodsId, @RequestParam("price") Integer price) {
         final GoodsData goodsData=GoodsData.builder()
-                .goodsDataId(goodsId)
+                .goodsId(goodsId)
                 .price(price)
                 .updatedDate(LocalDateTime.now())
                 .build();

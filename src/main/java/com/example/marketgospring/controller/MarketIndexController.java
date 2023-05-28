@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value="/marketIndex")
 public class MarketIndexController {
-    public MarketIndexRepository marketIndexRepository;
+    private MarketIndexRepository marketIndexRepository;
 
     @Autowired
     public MarketIndexController(MarketIndexRepository marketIndexRepository) {

@@ -1,10 +1,10 @@
 package com.example.marketgospring.entity;
 
 import lombok.*;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
+
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,8 +14,7 @@ import javax.persistence.*;
 @Builder
 @Table(name = "goods_data")
 public class GoodsData {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer goodsDataId;
     @Column
     private Integer goodsId;

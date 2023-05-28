@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value="/coupon")
 public class CouponController {
-    public CouponRepository couponRepository;
+    private CouponRepository couponRepository;
 
     @Autowired
     public CouponController(CouponRepository couponRepository) {this.couponRepository=couponRepository;}
