@@ -1,26 +1,82 @@
 package com.example.marketgospring.controller;
 
 
+import com.example.marketgospring.repository.JsonRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
-
+import com.google.cloud.vision.v1.AnnotateImageRequest;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
+import com.google.cloud.vision.v1.EntityAnnotation;
+import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.Image;
+import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.cloud.vision.v1.ImageSource;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value="/json")
 public class JsonController {
+    private JsonRepository jsonRepository;
 
-    @GetMapping(value = "/{json}")
-    public Map getJson(@PathVariable("json") String jsonData) {
+    @Autowired
+    public JsonController(JsonRepository jsonRepository) { this.jsonRepository=jsonRepository;}
+    @GetMapping(value = "/{fileId}")
+    public Map getFile(@PathVariable("fileId") Integer fileId) throws IOException {
+        String gcsPath= jsonRepository.getFilePath(fileId);
+        gcsPath="gs://marketgo/" + gcsPath;
+        List<AnnotateImageRequest> requests = new ArrayList<>();
+        String text = null;
+        ImageSource imgSource = ImageSource.newBuilder().setGcsImageUri(gcsPath).build();
+        Image img = Image.newBuilder().setSource(imgSource).build();
+        Feature feat = Feature.newBuilder().setType(Feature.Type.TEXT_DETECTION).build();
+        AnnotateImageRequest request =
+                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+        requests.add(request);
+
+        // Initialize client that will be used to send requests. This client only needs to be created
+        // once, and can be reused for multiple requests. After completing all of your requests, call
+        // the "close" method on the client to safely clean up any remaining background resources.
+        try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+            BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+            List<AnnotateImageResponse> responses = response.getResponsesList();
+
+            for (AnnotateImageResponse res : responses) {
+                if (res.hasError()) {
+                    System.out.format("Error: %s%n", res.getError().getMessage());
+                    return getJson("에러");
+                }
+                // For full list of available annotations, see http://g.co/cloud/vision/docs
+                for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
+                    if (text==null) {
+                        text=annotation.getDescription();
+                    }
+                    System.out.format("Text: %s%n", annotation.getDescription());
+                    //System.out.format("Position : %s%n", annotation.getBoundingPoly());
+                }
+                System.out.println(text);
+            }
+        }
+        return getJson(text);
+    }
+
+    //@GetMapping(value = "/{json}")
+    public Map getJson(/*@PathVariable("json") */String jsonData) {
 
         String openApiURL = "http://aiopen.etri.re.kr:8000/WiseNLU_spoken";
         String accessKey = "94a79136-75ad-4b96-bb41-10d6a8702ac6";   // 발급받은 API Key
