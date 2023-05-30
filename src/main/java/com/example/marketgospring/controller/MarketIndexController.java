@@ -22,7 +22,7 @@ public class MarketIndexController {
         this.marketIndexRepository = marketIndexRepository;
     }
 
-    @GetMapping
+    @GetMapping(value="/all")
     public Iterable<MarketIndex> list() {
         return marketIndexRepository.findAll();
     }
