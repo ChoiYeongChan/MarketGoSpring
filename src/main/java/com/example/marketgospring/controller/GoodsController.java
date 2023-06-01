@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,17 @@ public class GoodsController {
         return goodsRepository.findByMarketId(marketId);
     }
 
+    @GetMapping(value = "/goodsCompare/{goodsName}")
+    public List<Goods> findByGoodsName(@PathVariable("goodsName") String goodsName, @RequestParam("marketId") Integer marketId) {
+        List<Goods> goodsList = goodsRepository.findByGoodsNameContains(goodsName);
+        List<Goods> result = new ArrayList<>();
+        for (int i=0;i<goodsList.size(); i++) {
+            if (goodsList.get(i).getGoodsMarket().getMarketId()==marketId) {
+                result.add(goodsList.get(i));
+            }
+        }
+        return result;
+    }
     @PostMapping
     public Goods put(@RequestParam("goodsName") String goodsName, @RequestParam("marketId") Market marketId, @RequestParam("storeId") Store storeId, @RequestParam("goodsPrice") Integer goodsPrice, @RequestParam("goodsUnit") String goodsUnit, @RequestParam("goodsInfo") String goodsInfo, @RequestParam("goodsOrigin") String goodsOrigin, @RequestParam("isAvail") Integer isAvail, @RequestParam("goodsFile")S3File goodsFile) {
         LocalDateTime now=LocalDateTime.now();

@@ -17,4 +17,6 @@ public interface GoodsRepository extends JpaRepository <Goods, Integer> {
 
     @Query("select g from Goods g where g.goodsMarket.marketId=:marketId and g.isAvail<>0")
     List<Goods> findByMarketId(@Param("marketId")Integer marketId);
+
+    List<Goods> findByGoodsNameContains(String goodsName);
 }
