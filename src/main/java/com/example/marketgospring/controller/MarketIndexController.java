@@ -33,7 +33,7 @@ public class MarketIndexController {
     }
 
     @GetMapping(value = "/memberId/{memberId}")
-    public List<MarketIndex> findByMemberId(@PathVariable("memberId") Member memberId) {
+    public Optional<MarketIndex> findByMember(@PathVariable("memberId") Integer memberId) {
         return marketIndexRepository.findByMemberId(memberId);
     }
 
