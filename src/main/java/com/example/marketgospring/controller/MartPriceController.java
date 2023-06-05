@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,7 +30,17 @@ public class MartPriceController {
 
     @GetMapping(value = "/{goodsName}")
     public List<MartPrice> findByGoodsNameContaining(@PathVariable("goodsName") String goodsName) {
-        return martPriceRepository.findByGoodsNameContains(goodsName);
+        String[] word=goodsName.split("\\s");
+        List<MartPrice> martPriceList = new ArrayList<>();
+        List<MartPrice> mart;
+        for (int i=0;i < word.length; i++) {
+            mart=martPriceRepository.findByGoodsNameContains(word[i]);
+            for (int j = 0; j < mart.size(); j++) {
+                martPriceList.add(mart.get(j));
+            }
+        }
+        List<MartPrice> martPrices=martPriceList.stream().distinct().collect(Collectors.toList());
+        return martPrices;
     }
 
     @PostMapping
