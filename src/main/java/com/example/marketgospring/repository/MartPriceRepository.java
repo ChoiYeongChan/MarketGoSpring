@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MartPriceRepository extends JpaRepository<MartPrice, Integer> {
 
-    List<MartPrice> findByGoodsNameContains(String goodsName);
+    List<MartPrice> findByGoodsNameContainsOrderBySourceAsc(String goodsName);
 }

@@ -34,7 +34,7 @@ public class MartPriceController {
         List<MartPrice> martPriceList = new ArrayList<>();
         List<MartPrice> mart;
         for (int i=0;i < word.length; i++) {
-            mart=martPriceRepository.findByGoodsNameContains(word[i]);
+            mart=martPriceRepository.findByGoodsNameContainsOrderBySourceAsc(word[i]);
             for (int j = 0; j < mart.size(); j++) {
                 martPriceList.add(mart.get(j));
             }
