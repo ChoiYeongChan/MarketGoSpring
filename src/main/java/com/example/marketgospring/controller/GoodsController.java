@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -44,13 +45,18 @@ public class GoodsController {
 
     @GetMapping(value = "/goodsCompare/{goodsName}")
     public List<Goods> findByGoodsName(@PathVariable("goodsName") String goodsName, @RequestParam("marketId") Integer marketId) {
-        List<Goods> goodsList = goodsRepository.findByGoodsNameContains(goodsName);
-        List<Goods> result = new ArrayList<>();
-        for (int i=0;i<goodsList.size(); i++) {
-            if (goodsList.get(i).getGoodsMarket().getMarketId()==marketId) {
-                result.add(goodsList.get(i));
+        String[] word=goodsName.split("\\s");
+        List<Goods> good;
+        List<Goods> goodsList = new ArrayList<>();
+        for(int i=0;i< word.length;i++) {
+            good=goodsRepository.findByGoodsNameContains(word[i]);
+            for (int j=0;j<good.size();j++) {
+                if (good.get(j).getGoodsMarket().getMarketId()==marketId) {
+                    goodsList.add(good.get(j));
+                }
             }
         }
+        List<Goods> result=goodsList.stream().distinct().collect(Collectors.toList());
         return result;
     }
     @PostMapping
