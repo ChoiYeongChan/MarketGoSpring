@@ -58,6 +58,7 @@ public class MarketReviewController {
         return marketReviewRepository.save(marketReview);
     }
 
+    @Transactional
     @PutMapping(value = "/{marketReviewId}")
     public MarketReview update(@PathVariable("marketReviewId")Integer marketReviewId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("marketReviewFile") S3File marketReviewFile) {
         Optional<MarketReview> marketReview=marketReviewRepository.findById(marketReviewId);

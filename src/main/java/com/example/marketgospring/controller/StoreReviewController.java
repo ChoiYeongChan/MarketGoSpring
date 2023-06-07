@@ -57,6 +57,7 @@ public class StoreReviewController {
         return storeReviewRepository.save(storeReview);
     }
 
+    @Transactional
     @PutMapping(value = "/{storeReviewId}")
     public StoreReview update(@PathVariable("storeReviewId")Integer storeReviewId, @RequestParam("ratings")Float ratings, @RequestParam("reviewContent")String reviewContent, @RequestParam("storeReviewFile")S3File storeReviewFile) {
         Optional<StoreReview> storeReview=storeReviewRepository.findById(storeReviewId);
