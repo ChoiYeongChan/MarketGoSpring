@@ -14,6 +14,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     List<Coupon> findByStoreId(Integer storeId);
 
-    @Query("select c from Coupon c where c.storeId.storeMarketId=:marketId")
+    @Query("select c from Coupon c where c.storeId.storeMarketId.marketId=:marketId")
     List<Coupon> findByMarketId(@Param("marketId") Integer marketId);
 }
