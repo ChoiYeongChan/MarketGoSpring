@@ -20,4 +20,8 @@ public class Coupon {
     private Store storeId;
     @Column
     private String couponInfo;
+    @Column
+    private String discount;
+    @Column
+    private String duration;
 }

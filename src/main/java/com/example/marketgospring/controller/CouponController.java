@@ -40,19 +40,23 @@ public class CouponController {
     }
 
     @PostMapping
-    public Coupon put(@RequestParam("storeId") Store storeId, @RequestParam("couponInfo") String couponInfo) {
+    public Coupon put(@RequestParam("storeId") Store storeId, @RequestParam("couponInfo") String couponInfo, @RequestParam("discount") String discount, @RequestParam("duration") String duration) {
         final Coupon coupon = Coupon.builder()
                 .storeId(storeId)
                 .couponInfo(couponInfo)
+                .discount(discount)
+                .duration(duration)
                 .build();
         return couponRepository.save(coupon);
     }
 
     @PutMapping(value = "/{couponId}")
-    public Coupon update(@PathVariable("couponId") Integer couponId, @RequestParam("storeId") Store storeId, @RequestParam("couponInfo") String couponInfo) {
+    public Coupon update(@PathVariable("couponId") Integer couponId, @RequestParam("storeId") Store storeId, @RequestParam("couponInfo") String couponInfo, @RequestParam("discount") String discount, @RequestParam("duration") String duration) {
         Optional<Coupon> coupon = couponRepository.findById(couponId);
         coupon.get().setStoreId(storeId);
         coupon.get().setCouponInfo(couponInfo);
+        coupon.get().setDiscount(discount);
+        coupon.get().setDuration(duration);
         return couponRepository.save(coupon.get());
     }
 
