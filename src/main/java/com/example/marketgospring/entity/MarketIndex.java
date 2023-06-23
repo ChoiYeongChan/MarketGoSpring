@@ -48,5 +48,4 @@ public class MarketIndex {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id10")
     private Store storeId10;
-
 }

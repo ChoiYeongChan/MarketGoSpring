@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JsonRepository extends JpaRepository<Json, Integer> {
-    @Query(value = "select s.originalFileName from S3File s where s.fileId=:fileId")
+    @Query(value = "select s.uploadFileUrl from S3File s where s.fileId=:fileId")
     String getFilePath(@Param("fileId") Integer fileId);
 }

@@ -55,6 +55,7 @@ public class MarketIndexController {
         return marketIndexRepository.save(marketIndex);
     }
 
+
     @PutMapping(value = "/{indexId}")
     public MarketIndex update(@PathVariable("indexId")Integer indexId, @RequestParam("memberId")Member memberId, @RequestParam("storeId1") Store storeId1, @RequestParam("storeId2") Store storeId2,@RequestParam("storeId3") Store storeId3,@RequestParam("storeId4") Store storeId4,@RequestParam("storeId5") Store storeId5,@RequestParam("storeId6") Store storeId6,@RequestParam("storeId7") Store storeId7,@RequestParam("storeId8") Store storeId8,@RequestParam("storeId9") Store storeId9,@RequestParam("storeId10") Store storeId10) {
         Optional<MarketIndex> marketIndex=marketIndexRepository.findById(indexId);

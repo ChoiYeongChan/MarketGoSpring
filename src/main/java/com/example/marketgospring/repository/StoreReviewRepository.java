@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 public interface StoreReviewRepository extends JpaRepository<StoreReview, Integer> {
-    @Query(value = "select sr from StoreReview sr where sr.storeId.storeId = :storeId")
+    @Query(value = "select sr from StoreReview sr where sr.storeId.storeId = :storeId order by sr.reviewDate desc")
     List<StoreReview> findBySrStoreId(@Param("storeId") Integer storeId);
 
     @Query(value = "select sr from StoreReview sr where sr.memberId.memberId = :memberId")
