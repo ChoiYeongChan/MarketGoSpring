@@ -5,5 +5,7 @@
 제작자 : 최영찬
 
 서버 : AWS
+
 프레임워크 : Spring Boot (JAVA)
+
 DB : MySQL
